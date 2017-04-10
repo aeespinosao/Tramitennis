@@ -1,0 +1,138 @@
+/***
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+body {
+  background: #F1F3FA;
+}
+
+nav {
+  padding: 20px 0 10px 0;
+  margin-top: 20px;
+  background: #fff;
+  position: fixed;
+
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+
+body > div > nav > ul > li > a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+body > div > nav > ul > li > a > i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+body > div > nav > ul > li > a:hover {
+  background-color: #f6f9fb;
+  color: #5b9bd1;
+}
+
+body > div > nav > ul > li.active {
+  border-bottom: none;
+
+}
+
+body > div > nav > ul > li.active > a {
+  color: #FFA420;
+  background-color: #FFA420;
+  border-left: 2px solid #FF7514;
+  margin-left: -2px;
+}
+
+#menu-title{
+  font-size: 3em;
+}
+
+/* Profile container
+.profile {
+  margin: 0px 0;
+}
+
+.profile-sidebar {
+  padding: 20px 0 10px 0;
+  background: #fff;
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-usermenu {
+  margin-top: 30px;
+}
+
+.profile-usermenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.profile-usermenu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+.profile-usermenu ul li.active {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+
+.profile-content {
+  padding: 20px;
+  background: #fff;
+}
+*/

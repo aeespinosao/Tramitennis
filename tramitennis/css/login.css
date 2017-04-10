@@ -1,9 +1,6 @@
-div{
+div#banner {
   height: 709px;
   width: 1500px;
-}
-
-div#banner {
   /* Ubicación de la imagen */
   background-image: url('../img/banner.jpg');
 
