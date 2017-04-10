@@ -1,0 +1,80 @@
+div{
+  height: 709px;
+  width: 1500px;
+}
+
+div#banner {
+  /* Ubicación de la imagen */
+  background-image: url('../img/banner.jpg');
+
+  /* Nos aseguramos que la imagen de fondo este centrada vertical y
+    horizontalmente en todo momento */
+  background-position: center center;
+
+  /* La imagen de fondo no se repite */
+  background-repeat: no-repeat;
+
+  /* La imagen de fondo está fija en el viewport, de modo que no se mueva cuando
+     la altura del contenido supere la altura de la imagen. */
+  background-attachment: fixed;
+
+  /* La imagen de fondo se reescala cuando se cambia el ancho de ventana
+     del navegador */
+  background-size: cover;
+
+  /* Fijamos un color de fondo para que se muestre mientras se está
+    cargando la imagen de fondo o si hay problemas para cargarla  */
+  background-color: rgba(0,0,0,0.8);
+  filter:brightness(1);
+}
+
+div#banner h1#title{
+  color: white;
+  text-align: center;
+  padding-top: 200px;
+  font-size: 8em;
+  padding-left: 220px;
+}
+#banner > a
+#banner > a.btn-xl {
+    padding: 15px 45px;
+    font-size: 200px;
+}
+
+#banner > a.btn {
+    border-radius: 300px;
+}
+
+#banner > a.btn-outline {
+    color: #fff;
+    border: 3px solid;
+}
+
+#title {
+  padding-left: 150px;
+}
+
+#banner > hr {
+    border-color: #F05F40;
+    border-width: 3px;
+    max-width: 50px;
+    margin-top: 0px;
+    padding-left: 50px;
+    margin-left: 940px;
+}
+
+#banner > a.col-sm-3.col-sm-offset-5.btn.btn-outline.btn-xl:hover{
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+    color: #F05F40;
+    font-size: 20px;
+}
+
+#banner > a:nth-child(4):hover{
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+    color: #F05F40;
+    font-size: 20px;
+}
