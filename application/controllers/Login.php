@@ -5,15 +5,17 @@ class Login extends CI_Controller {
 
 	public function administrador()
 	{
-		$this->load->view('plantillas/header.php');
-		$this->load->view('administrador/menu.php');
-		$this->load->view('plantillas/footer.php');
+		$data = array('bread' => array('1'=> array('Página principal','#')));
+		$this->load->view('plantillas/header');
+		$this->load->view('administrador/menu',$data);
+		$this->load->view('plantillas/footer');
 	}
 
   public function jugador()
 	{
-		$this->load->view('plantillas/header.php');
-		$this->load->view('jugador/menu.php');
-		$this->load->view('plantillas/footer.php');
+		$data = array('bread' => array('1'=> array('Página principal','#')));
+		$this->load->view('plantillas/header');
+		$this->load->view('jugador/menu',$data);
+		$this->load->view('plantillas/footer');
 	}
 }

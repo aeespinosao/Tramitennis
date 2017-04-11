@@ -21,8 +21,12 @@ div#banner {
 
   /* Fijamos un color de fondo para que se muestre mientras se está
     cargando la imagen de fondo o si hay problemas para cargarla  */
-  background-color: rgba(0,0,0,0.8);
-  filter:brightness(1);
+  /*background-color: rgba(0,0,0,0.9);*/
+
+}
+
+div#banner > div#no_opaco{
+  border: 3px solid #10a725;
 }
 
 div#banner h1#title{
@@ -57,10 +61,10 @@ div#banner h1#title{
     max-width: 50px;
     margin-top: 0px;
     padding-left: 50px;
-    margin-left: 940px;
+    margin-left: 820px;
 }
 
-#banner > a.col-sm-3.col-sm-offset-5.btn.btn-outline.btn-xl:hover{
+#banner > a.col-sm-3.col-sm-offset-4.btn.btn-outline.btn-xl:hover{
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
