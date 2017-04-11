@@ -6,6 +6,7 @@
     <link href="<?php echo base_url();?>tramitennis/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>tramitennis/css/login.css" rel="stylesheet">
     <link href="<?php echo base_url();?>tramitennis/css/menu.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>tramitennis/css/form.css" rel="stylesheet">
     <link rel="icon" href="<?php echo base_url();?>tramitennis/img/icono.ico">
   </head>
   <body>

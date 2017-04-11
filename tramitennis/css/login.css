@@ -25,10 +25,6 @@ div#banner {
 
 }
 
-div#banner > div#no_opaco{
-  border: 3px solid #10a725;
-}
-
 div#banner h1#title{
   color: white;
   text-align: center;

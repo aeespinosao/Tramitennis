@@ -1,0 +1,114 @@
+.focus-t span {
+    bottom: 36px !important;;
+    color: #F05F40;
+    font-size: 15px;
+
+    z-index:1;
+}
+.focus-t input:focus{
+	border-color: #F05F40;
+  border-bottom: 2px solid #F05F40 !important;
+}
+.text-effect input {
+    border:none;
+    border-bottom:1px solid #073951 !important;
+    border-radius: 0;
+    position:absolute;
+	  bottom:0;
+    border-style: none none solid;
+    border-width: 0 0 2px;
+    box-shadow: none;
+	  z-index:2;
+	  background-color:transparent;
+}
+.form-control:focus {
+    border-bottom:2px solid #F05F40 !important;
+    box-shadow: none;
+    outline: 0 none;
+
+}
+.text-effect {
+    position: relative;
+	height:70px;
+}
+.text-effect span {
+    bottom: 3px;
+    position: absolute;
+	  z-index:1;
+}
+
+ul li{
+  display: block;
+  position: relative;
+  float: left;
+}
+
+ul li input[type=radio]{
+  position: absolute;
+  visibility: hidden;
+}
+
+ul li label{
+  display: block;
+  font-size: 1em;
+  padding: 0px;
+  margin: 10px auto;
+  margin-top: 25px;
+  z-index: 9;
+  -webkit-transition: all 0.25s linear;
+}
+
+ul li:hover label{
+	color: #B9DC9C;
+}
+
+ul li .check{
+  display: block;
+  border: 5px solid #AAAAAA;
+  position: absolute;
+  border-radius: 100%;
+  height: 10px;
+  width: 10px;
+  top: 30px;
+  left: 20px;
+	z-index: 5;
+	transition: border .25s linear;
+	-webkit-transition: border .25s linear;
+}
+
+ul li:hover .check {
+  border: 5px solid #B9DC9C;
+}
+
+ul li .check::before {
+  position: relative;
+  height: 10px;
+  width: 10px;
+	transition: background 0.25s linear;
+	-webkit-transition: background 0.25s linear;
+}
+
+input[type=radio]:checked ~ .check {
+  border: 5px solid #F05F40;
+}
+
+input[type=radio]:checked ~ .check::before{
+  background: #F05F40;
+}
+
+input[type=radio]:checked ~ label{
+  color: #F05F40;
+}
+
+#contenido > form > div > div > div > div > div > label{
+  padding-left: 0px;
+  padding-right: 40px;
+}
+#contenido > form > div > div > div > div > label > input[type="radio"]:checked+label{
+  margin: 0px;
+  background-color: orange;
+}
+
+#select:focus{
+  border-bottom: 2px solid #FFFFFF !important;
+}
