@@ -15,7 +15,7 @@
           <td><?php echo $curso['codigo']; ?></td>
           <td><?php echo $curso['nombre']; ?></td>
           <td><?php echo $curso['nivel']; ?></td>
-          <td><a href="<?php echo base_url();?>index.php/admin_cursos/eliminar/<?php echo $curso['codigo'];?>" class="btn btn-danger">Eliminar</a></td>
+          <td><a href="<?php echo base_url();?>index.php/admin_cursos/editar/<?php echo $curso['codigo'];?>" class="btn btn-primary">Editar</a></td>
         </tr>
        <?php  } ?>
 
