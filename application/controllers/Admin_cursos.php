@@ -36,7 +36,7 @@ class Admin_cursos extends CI_Controller {
                                      '3'=> array('Matricular curso','#')));
   		$this->load->view('plantillas/header');
   		$this->load->view('jugador/menu',$data);
-      $this->load->view('jugador/matricular');
+      $this->load->view('jugador/matricula');
   		$this->load->view('plantillas/footer');
     }elseif($vista==='cancelar'){
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/jugador'),

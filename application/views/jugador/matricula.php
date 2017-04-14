@@ -1,6 +1,6 @@
 <div class="col-sm-9">
-  Cancelar curso
-  <form action="" name="cancelar" method="post">
+  Matricular curso
+  <form action="" name="matricular" method="post">
     <table class="table table-hover" id="matricular_cursos">
       <thead>
         <th></th>
@@ -19,7 +19,7 @@
                       <tr>
                         <td>
                           <div class="material-switch pull-right">
-                            <input id="someSwitchOptionSuccess<?php echo $curso['codigo']; ?>" name="cursos_seleccionados" type="checkbox" value="<?php echo $curso['codigo'];?>" checked/>
+                            <input id="someSwitchOptionSuccess<?php echo $curso['codigo']; ?>" name="cursos_seleccionados" type="checkbox" value="<?php echo $curso['codigo'];?>"/>
                             <label for="someSwitchOptionSuccess<?php echo $curso['codigo']; ?>" class="label-success"></label>
                           </div>
                         </td>
@@ -37,7 +37,7 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
          <div class="form-group">
-            <button type="submit" class="btn btn-primary" id="submit">Cancelar curso</button>
+            <button type="submit" class="btn btn-primary" id="submit">Confirmar matrícula</button>
           </div>
         </div>
     </div>
