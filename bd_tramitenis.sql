@@ -1,21 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2017 a las 18:54:39
--- Versión del servidor: 10.1.16-MariaDB
--- Versión de PHP: 5.6.24
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Base de datos: `tramitenis`
 --
@@ -140,14 +122,22 @@ ALTER TABLE `cancha`
 -- Indices de la tabla `curso`
 --
 ALTER TABLE `curso`
-  ADD PRIMARY KEY (`codigo`);
+  ADD PRIMARY KEY (`codigo`),
+  ADD KEY `horario_curso` (`horario`);
+
+--
+-- Indices de la tabla `evento`
+--
+ALTER TABLE `evento`
+  ADD KEY `horario_evento` (`horario`);
 
 --
 -- Indices de la tabla `horario`
 --
 ALTER TABLE `horario`
   ADD PRIMARY KEY (`fecha`,`hora`),
-  ADD UNIQUE KEY `numero` (`numero`);
+  ADD UNIQUE KEY `numero` (`numero`),
+  ADD KEY `cancha_horario` (`cancha`);
 
 --
 -- Indices de la tabla `jugador`
@@ -159,7 +149,8 @@ ALTER TABLE `jugador`
 -- Indices de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  ADD PRIMARY KEY (`codigo`);
+  ADD PRIMARY KEY (`codigo`),
+  ADD KEY `horario_reserva` (`horario`);
 
 --
 -- Indices de la tabla `usuario`
@@ -177,6 +168,46 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `horario`
   MODIFY `numero` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD CONSTRAINT `administrador_usuario` FOREIGN KEY (`cedula`) REFERENCES `usuario` (`cedula`);
+
+--
+-- Filtros para la tabla `curso`
+--
+ALTER TABLE `curso`
+  ADD CONSTRAINT `horario_curso` FOREIGN KEY (`horario`) REFERENCES `horario` (`numero`);
+
+--
+-- Filtros para la tabla `evento`
+--
+ALTER TABLE `evento`
+  ADD CONSTRAINT `horario_evento` FOREIGN KEY (`horario`) REFERENCES `horario` (`numero`);
+
+--
+-- Filtros para la tabla `horario`
+--
+ALTER TABLE `horario`
+  ADD CONSTRAINT `cancha_horario` FOREIGN KEY (`cancha`) REFERENCES `cancha` (`numero`);
+
+--
+-- Filtros para la tabla `jugador`
+--
+ALTER TABLE `jugador`
+  ADD CONSTRAINT `jugador_usuario` FOREIGN KEY (`cedula`) REFERENCES `usuario` (`cedula`);
+
+--
+-- Filtros para la tabla `reserva`
+--
+ALTER TABLE `reserva`
+  ADD CONSTRAINT `horario_reserva` FOREIGN KEY (`horario`) REFERENCES `horario` (`numero`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
