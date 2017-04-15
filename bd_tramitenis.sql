@@ -30,7 +30,6 @@ CREATE TABLE `cancha` (
 
 CREATE TABLE `curso` (
   `codigo` int(20) NOT NULL,
-  --`nombre` int(20) NOT NULL,
   `nivel` varchar(20) NOT NULL,
   `cupos_disponibles` int(3) NOT NULL,
   `horario` int(10) NOT NULL
@@ -60,7 +59,8 @@ CREATE TABLE `horario` (
   `hora` time NOT NULL,
   `estado` varchar(20) NOT NULL DEFAULT 'disponible',
   `numero` int(10) NOT NULL AUTO_INCREMENT,
-  `cancha` int(3) NOT NULL
+  `cancha` int(3) NOT NULL,
+  UNIQUE KEY `numero` (`numero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -136,8 +136,8 @@ ALTER TABLE `evento`
 -- Indices de la tabla `horario`
 --
 ALTER TABLE `horario`
-  ADD PRIMARY KEY (`fecha_inicio`,`hora`,'cancha'),
-  ADD UNIQUE KEY `numero` (`numero`),
+  ADD PRIMARY KEY (`fecha_inicio`,`hora`,`cancha`),
+
   ADD KEY `cancha_horario` (`cancha`);
 
 --
@@ -167,8 +167,7 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
-ALTER TABLE `horario`
-  MODIFY `numero` int(10) NOT NULL AUTO_INCREMENT;
+
 --
 -- Restricciones para tablas volcadas
 --
