@@ -5,7 +5,6 @@
       <thead>
         <th></th>
         <th>Código</th>
-        <th>Nombre</th>
         <th>Nivel</th>
         <th>Horario</th>
       </thead>
@@ -24,7 +23,6 @@
                           </div>
                         </td>
                         <td><?php echo $curso['codigo']; ?></td>
-                        <td><?php echo $curso['nombre']; ?></td>
                         <td><?php echo $curso['nivel']; ?></td>
                         <td><?php echo 1; ?></td>
                       </tr>

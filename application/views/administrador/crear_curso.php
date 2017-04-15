@@ -1,7 +1,7 @@
 <div class="col-sm-9" id="contenido">
   Crear curso
   <form class="" action="index.html" method="post">
-    <div class="row">
+    <!--<div class="row">
         <div class="col-sm-10 col-sm-offset-1">
         	<div class="form-group">
               <div class="text-effect">
@@ -10,7 +10,7 @@
               </div>
           </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
         	<div class="form-group">

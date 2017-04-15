@@ -16,7 +16,7 @@
         </div>
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul id="top-menu" class="nav navbar-nav">
-            <li class="efecto"><a href="#">Página principal</a></li>
+            <li class="efecto"><a href="<?php echo base_url();?>index.php/login/jugador">Página principal</a></li>
             <li class="dropdown efecto">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion de cursos <b class="caret"></b></a>
               <ul class="dropdown-menu">

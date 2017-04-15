@@ -9,3 +9,12 @@ $('.focus-text').blur(function(){
       $(this).closest('div').removeClass('focus-t');
   }
 })
+
+$('document').ready(function () {
+  if($('.focus-text').length > 0 && $('.focus-text').val() != ''){
+      $('.focus-text').closest('div').addClass('focus-t');
+  }
+  else{
+      $('.focus-text').closest('div').removeClass('focus-t');
+  }
+})

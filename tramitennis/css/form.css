@@ -110,7 +110,11 @@ input[type=radio]:checked ~ label{
 }
 
 #select:focus{
-  border-bottom: 2px solid #FFFFFF !important;
+  border: 2px solid #F05F40 !important;
+}
+
+#select > option:hover{
+  color: : #F05F40;
 }
 
 .material-switch > input[type="checkbox"]  {

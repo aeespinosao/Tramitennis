@@ -3,8 +3,8 @@
   <table class="table table-hover" id="editar_cursos">
     <thead>
       <th>Código</th>
-      <th>Nombre</th>
       <th>Nivel</th>
+      <th>Horario</th>
       <th></th>
     </thead>
     <tbody>
@@ -13,8 +13,8 @@
       foreach ($cursos as $curso) { ?>
         <tr>
           <td><?php echo $curso['codigo']; ?></td>
-          <td><?php echo $curso['nombre']; ?></td>
           <td><?php echo $curso['nivel']; ?></td>
+          <td><?php echo /*$curso['horario']*/ 1; ?></td>
           <td><a href="<?php echo base_url();?>index.php/admin_cursos/editar/<?php echo $curso['codigo'];?>" class="btn btn-primary">Editar</a></td>
         </tr>
        <?php  } ?>

@@ -30,7 +30,7 @@ CREATE TABLE `cancha` (
 
 CREATE TABLE `curso` (
   `codigo` int(20) NOT NULL,
-  `nombre` int(20) NOT NULL,
+  --`nombre` int(20) NOT NULL,
   `nivel` varchar(20) NOT NULL,
   `cupos_disponibles` int(3) NOT NULL,
   `horario` int(10) NOT NULL
@@ -55,10 +55,11 @@ CREATE TABLE `evento` (
 --
 
 CREATE TABLE `horario` (
-  `fecha` date NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL ,
   `hora` time NOT NULL,
-  `estado` varchar(20) NOT NULL,
-  `numero` int(10) NOT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'disponible',
+  `numero` int(10) NOT NULL AUTO_INCREMENT,
   `cancha` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -135,7 +136,7 @@ ALTER TABLE `evento`
 -- Indices de la tabla `horario`
 --
 ALTER TABLE `horario`
-  ADD PRIMARY KEY (`fecha`,`hora`),
+  ADD PRIMARY KEY (`fecha_inicio`,`hora`,'cancha'),
   ADD UNIQUE KEY `numero` (`numero`),
   ADD KEY `cancha_horario` (`cancha`);
 
@@ -211,3 +212,6 @@ ALTER TABLE `reserva`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+INSERT INTO `horario`(`fecha_inicio`, `hora`, `cancha`, `fecha_fin`) VALUES (date('2017-4-14'),time('6:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('7:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('8:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('9:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('10:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('11:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('12:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('13:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('14:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('15:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('16:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('17:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('18:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('19:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('20:00'),'2',date('2017-5-30'));
