@@ -7,9 +7,14 @@ class Admin_cursos extends CI_Controller {
 	{
     $vista = $this->uri->segment(3);
     if($vista==='crear'){
+      $this->load->model('Cancha');
+      $canchas = [];
+      $canchas = $this->Cancha->get_all();    
+      
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
-                                     '3'=> array('Crear curso','#')));
+                                     '3'=> array('Crear curso','#')),
+                    'canchas' => $canchas);
   		$this->load->view('plantillas/header');
   		$this->load->view('administrador/menu',$data);
       $this->load->view('administrador/crear_curso');
@@ -65,4 +70,26 @@ class Admin_cursos extends CI_Controller {
 		$this->load->view('plantillas/footer');
 	}
 
+  public function crear_nuevo(){
+    $this->load->model('curso');
+    $radios = array('principiante'=>$this->input->post("selector_principiante"),'intermedio'=>$this->input->post("selector_intermedio"),'avanzado'=>$this->input->post("selector_avanzado"),'precompetencia'=>$this->input->post("selector_precompetencia"),'seleccion'=>$this->input->post("selector_seleccion"));
+
+    foreach ($radios as $key => $radio) {  
+      if ($radio == "on"){
+        $nivel  = $key;
+      }
+    }
+    $cupos = $this->input->post("cupos");
+    $horario = $this->input->post("horario");
+    $codigo = 1;
+
+    $this->curso->codigo = $codigo;
+    $this->curso->nivel = $nivel;
+    $this->curso->cupos = $cupos;
+    $this->curso->horario = $horario;
+
+    if($this->curso->save()){
+      echo "guardado";
+    }
+  }
 }
