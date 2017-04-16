@@ -7,14 +7,14 @@ class Admin_cursos extends CI_Controller {
 	{
     $vista = $this->uri->segment(3);
     if($vista==='crear'){
-      $this->load->model('Cancha');
-      $canchas = [];
-      $canchas = $this->Cancha->get_all();    
+      $this->load->model('Horario');
+      $horarios = [];
+      $horarios = $this->Horario->get_all();    
       
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
                                      '3'=> array('Crear curso','#')),
-                    'canchas' => $canchas);
+                    'horarios' => $horarios);
   		$this->load->view('plantillas/header');
   		$this->load->view('administrador/menu',$data);
       $this->load->view('administrador/crear_curso');

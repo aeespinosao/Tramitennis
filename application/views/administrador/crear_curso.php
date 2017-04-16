@@ -62,58 +62,44 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
-          <div class="form-group">
-              <div class="text-effect">
-                  <span>Fecha inicio</span>
-                  <input type="date" name="inicio" class="form-control focus-text"/>
-              </div>
-          </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
-          <div class="form-group">
-              <div class="text-effect">
-                  <span>Fecha de finalización</span>
-                  <input type="date" name="fin" class="form-control focus-text"/>
-              </div>
-          </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
-          <div class="form-group">
-              <div class="select">
-                  <span>Cancha</span>
-                  <select class="form-control" id="select" name="cancha">
-                    <?php foreach($canchas as $cancha){ ?>
-
-                    <option value = "<?php echo $cancha->numero?>"><?php echo $cancha->numero?></option>
-                  <?php } ?>
-                  </select>
-              </div>
-          </div>
-        </div>
-    </div><br>
     
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
-        	<div class="form-group">
-              <div class="select">
-                  <span>Hora</span>
-                  <select class="form-control" id="select" name="horario">
-                    <option value = "6">6-8</option>
-                    <option value = "8">8-10</option>
-                    <option value = "10">10-12</option>
-                  </select>
+    <table class="table table-hover" id="crear_cursos">
+      <thead>
+        <th></th>
+        <th>Numero</th>
+        <th>Fecha de inicio</th>
+        <th>Fecha de finalizacion</th>
+        <th>Hora</th>
+        <th>Estado</th>
+        <th>Cancha</th>        
+      </thead>
+      <tbody>
+          <div class="row">
+              <div class="col-sm-10 col-sm-offset-1">
+                <div class="form-group">
+                  <?php foreach ($horarios as $horario) { ?>
+                      <tr>
+                        <td>
+                          <div class="material-switch pull-right">
+                            <input id="someSwitchOptionSuccess<?php echo $horario->numero; ?>" name="cursos_seleccionados" type="checkbox" value="<?php echo $horario->numero;?>"/>
+                            <label for="someSwitchOptionSuccess<?php echo $horario->numero; ?>" class="label-success"></label>
+                          </div>
+                        </td>
+                        <td><?php echo $horario->numero; ?></td>
+                        <td><?php echo $horario->fecha_inicio; ?></td>
+                        <td><?php echo $horario->fecha_fin; ?></td>
+                        <td><?php echo $horario->hora; ?></td>
+                        <td><?php echo $horario->estado; ?></td>
+                        <td><?php echo $horario->cancha; ?></td>x                        
+                      </tr>
+                   <?php  } ?>
+                </div>
               </div>
-          </div>
-        </div>
-    </div><br>
+            </div>
+      </tbody>
+    </table>
+
+    <br>
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
         	<div class="form-group">
