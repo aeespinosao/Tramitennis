@@ -24,25 +24,25 @@
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="intermedio" name="selector_intermedio">
+                          <input type="radio" id="intermedio" name="selector">
                           <label for="intermedio">Intermedio</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="avanzado" name="selector_avanzado">
+                          <input type="radio" id="avanzado" name="selector">
                           <label for="avanzado">Avanzado</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="precompetencia" name="selector_precompetencia">
+                          <input type="radio" id="precompetencia" name="selector">
                           <label for="precompetencia">Precompetencia</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="seleccion" name="selector_seleccion">
+                          <input type="radio" id="seleccion" name="selector">
                           <label for="seleccion">Selección</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
@@ -61,8 +61,6 @@
           </div>
         </div>
     </div>
-
-    
     <table class="table table-hover" id="crear_cursos">
       <thead>
         <th></th>
@@ -71,7 +69,7 @@
         <th>Fecha de finalizacion</th>
         <th>Hora</th>
         <th>Estado</th>
-        <th>Cancha</th>        
+        <th>Cancha</th>
       </thead>
       <tbody>
           <div class="row">
@@ -90,7 +88,7 @@
                         <td><?php echo $horario->fecha_fin; ?></td>
                         <td><?php echo $horario->hora; ?></td>
                         <td><?php echo $horario->estado; ?></td>
-                        <td><?php echo $horario->cancha; ?></td>x                        
+                        <td><?php echo $horario->cancha; ?></td>x
                       </tr>
                    <?php  } ?>
                 </div>
