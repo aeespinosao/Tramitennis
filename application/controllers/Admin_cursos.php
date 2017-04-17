@@ -9,8 +9,8 @@ class Admin_cursos extends CI_Controller {
     if($vista==='crear'){
       $this->load->model('Horario');
       $horarios = [];
-      $horarios = $this->Horario->get_all();    
-      
+      $horarios = $this->Horario->get_all();
+
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
                                      '3'=> array('Crear curso','#')),
@@ -71,11 +71,63 @@ class Admin_cursos extends CI_Controller {
 	}
 
   public function crear_nuevo(){
-    $this->load->model('curso');
-    $this->load->model('horario');
-    $radios = array('principiante'=>$this->input->post("selector_principiante"),'intermedio'=>$this->input->post("selector_intermedio"),'avanzado'=>$this->input->post("selector_avanzado"),'precompetencia'=>$this->input->post("selector_precompetencia"),'seleccion'=>$this->input->post("selector_seleccion"));
+		$config = array(
+      array(
+							'field' => 'selector',
+							'label' => 'Nivel',
+							'rules' => 'required'
+			),
+			array(
+							'field' => 'cupos',
+							'label' => 'Cupos',
+							'rules' => 'required',
+			),
+			array(
+							'field' => 'horario',
+							'label' => 'Horario',
+							'rules' => 'min_length[1]'
+			)
+			);
+			$this->form_validation->set_rules($config);
+		if ($this->form_validation->run() == FALSE)
+	    {
+				$this->load->model('Horario');
+	      $horarios = [];
+	      $horarios = $this->Horario->get_all();
+				$data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
+																			 '2'=> array('Gestion de cursos','#'),
+																			 '3'=> array('Crear curso','#')),
+											'horarios' => $horarios);
+				$this->load->view('plantillas/header');
+				$this->load->view('administrador/menu',$data);
+				$this->load->view('administrador/crear_curso');
+				$this->load->view('plantillas/footer');
+			}
+		else{
+			$this->load->model('Horario');
+      $horarios = [];
+      $horarios = $this->Horario->get_all();
+			$data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
+																		 '2'=> array('Gestion de cursos','#'),
+																		 '3'=> array('Crear curso','#')),
+										'horarios' => $horarios);
+			$this->session->set_flashdata('success', 'Datos insertados correctamente');
+			$this->load->view('plantillas/header');
+			$this->load->view('administrador/menu',$data);
+			$this->load->view('administrador/crear_curso');
+			$this->load->view('plantillas/footer');
+			$this->load->model('curso');
+	    $this->load->model('horario');
+			$horarios = $this->input->post("cursos_seleccionados");
+			foreach ($horarios as $horario) {
+				echo $horario.'\n';
+		}
 
-    foreach ($radios as $key => $radio) {  
+		}
+
+    /*$radios = array('principiante'=>$this->input->post("selector_principiante"),'intermedio'=>$this->input->post("selector_intermedio"),'avanzado'=>$this->input->post("selector_avanzado"),'precompetencia'=>$this->input->post("selector_precompetencia"),'seleccion'=>$this->input->post("selector_seleccion"));
+
+    foreach ($radios as $key => $radio) {
       if ($radio == "on"){
         $nivel  = $key;
       }
@@ -83,7 +135,7 @@ class Admin_cursos extends CI_Controller {
     $cupos = $this->input->post("cupos");
     $horario = $this->input->post("cursos_seleccionados");
     $codigo = $horario + 100;
-    
+
     $this->curso->codigo = $codigo;
     $this->curso->nivel = $nivel;
     $this->curso->cupos = $cupos;
@@ -95,8 +147,8 @@ class Admin_cursos extends CI_Controller {
         'saved' => 'Curso creado satisfactoriamente.');
       $this->load->view('plantillas/header');
       #Falta usar el saved
-      $this->load->view('administrador/menu',$data);      
+      $this->load->view('administrador/menu',$data);
       $this->load->view('plantillas/footer');
-    }
+    }*/
   }
 }
