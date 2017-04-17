@@ -27,31 +27,31 @@
                   <span>Nivel</span>
                       <ul>
                         <li class="col-sm-2">
-                          <input type="radio" id="principiante" name="selector">
+                          <input type="radio" id="principiante" name="selector" value="principiante">
                           <label for="principiante">Principiante</label>
                           <div class="check"></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="intermedio" name="selector">
+                          <input type="radio" id="intermedio" name="selector" value="intermedio">
                           <label for="intermedio">Intermedio</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="avanzado" name="selector">
+                          <input type="radio" id="avanzado" name="selector" value="avanzado">
                           <label for="avanzado">Avanzado</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="precompetencia" name="selector">
+                          <input type="radio" id="precompetencia" name="selector" value="precompetencia">
                           <label for="precompetencia">Precompetencia</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="seleccion" name="selector">
+                          <input type="radio" id="seleccion" name="selector" value="seleccion">
                           <label for="seleccion">Selección</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
@@ -94,7 +94,7 @@
                               <tr>
                                 <td>
                                   <div class="material-switch pull-right">
-                                    <input id="someSwitchOptionSuccess<?php echo $horario->numero; ?>" name="cursos_seleccionados[]" type="checkbox" value="<?php echo $horario->numero;?>"/>
+                                    <input id="someSwitchOptionSuccess<?php echo $horario->numero; ?>" name="horarios_seleccionados[]" type="checkbox" value="<?php echo $horario->numero;?>"/>
                                     <label for="someSwitchOptionSuccess<?php echo $horario->numero; ?>" class="label-success"></label>
                                   </div>
                                 </td>

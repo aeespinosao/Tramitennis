@@ -7,12 +7,27 @@ class Curso extends CI_Model {
 	public $cupos;
 	public $horario;
 
+    public function __construct($value = null) {
+        parent::__construct();
+        $this->load->database();
+        if ($value != null) {
+            if (is_array($value))
+                settype($value, 'object');
+
+            if (is_object($value)) {
+                $this->codigo = isset($value->codigo) ? $value->codigo : null;
+                $this->nivel = isset($value->nivel) ? $value->nivel : null;
+                $this->cupos = isset($value->cupos) ? $value->cupos : null;
+                $this->horario = isset($value->horario) ? $value->horario : null;                
+            }
+        }
+    }
+
 	public function save(){
 
         $this->load->database();
         try{
-            $this->db->insert("curso", array(
-                'codigo' => $this->codigo,        	
+            $this->db->insert("curso", array(                      	
                 'nivel' => $this->nivel,
                 'cupos_disponibles' => $this->cupos,
                 'horario' => $this->horario
