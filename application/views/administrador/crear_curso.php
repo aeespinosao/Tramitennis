@@ -79,7 +79,7 @@
                       <tr>
                         <td>
                           <div class="material-switch pull-right">
-                            <input id="someSwitchOptionSuccess<?php echo $horario->numero; ?>" name="cursos_seleccionados" type="checkbox" value="<?php echo $horario->numero;?>"/>
+                            <input id="someSwitchOptionSuccess<?php echo $horario->numero; ?>" name="cursos_seleccionados[]" type="checkbox" value="<?php echo $horario->numero;?>"/>
                             <label for="someSwitchOptionSuccess<?php echo $horario->numero; ?>" class="label-success"></label>
                           </div>
                         </td>
