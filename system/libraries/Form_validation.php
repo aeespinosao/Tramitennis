@@ -88,14 +88,14 @@ class CI_Form_validation {
 	 *
 	 * @var string
 	 */
-	protected $_error_prefix	= '<p>';
+	protected $_error_prefix	= '<div class="alert alert-danger" style="color:white; background-color:#E00000;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>';
 
 	/**
 	 * End tag for error wrapping
 	 *
 	 * @var string
 	 */
-	protected $_error_suffix	= '</p>';
+	protected $_error_suffix	= '</div>';
 
 	/**
 	 * Custom error message
