@@ -14,5 +14,11 @@ class Horario extends CI_Model {
 		$query = $this->db->get('horario');
 		return $query->result();
 	}
+
+	public function editar_estado($num){
+		$this->db->set('estado', 'no disponible');
+		$this->db->where('numero', $num);
+		$this->db->update('horario');
+	}
 }?>
 	

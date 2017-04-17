@@ -72,6 +72,7 @@ class Admin_cursos extends CI_Controller {
 
   public function crear_nuevo(){
     $this->load->model('curso');
+    $this->load->model('horario');
     $radios = array('principiante'=>$this->input->post("selector_principiante"),'intermedio'=>$this->input->post("selector_intermedio"),'avanzado'=>$this->input->post("selector_avanzado"),'precompetencia'=>$this->input->post("selector_precompetencia"),'seleccion'=>$this->input->post("selector_seleccion"));
 
     foreach ($radios as $key => $radio) {  
@@ -80,16 +81,22 @@ class Admin_cursos extends CI_Controller {
       }
     }
     $cupos = $this->input->post("cupos");
-    $horario = $this->input->post("horario");
-    $codigo = 1;
-
+    $horario = $this->input->post("cursos_seleccionados");
+    $codigo = $horario + 100;
+    
     $this->curso->codigo = $codigo;
     $this->curso->nivel = $nivel;
     $this->curso->cupos = $cupos;
     $this->curso->horario = $horario;
 
     if($this->curso->save()){
-      echo "guardado";
+      $this->horario->editar_estado($horario);
+      $data = array('bread' => array('1'=> array('Página principal','#')),
+        'saved' => 'Curso creado satisfactoriamente.');
+      $this->load->view('plantillas/header');
+      #Falta usar el saved
+      $this->load->view('administrador/menu',$data);      
+      $this->load->view('plantillas/footer');
     }
   }
 }

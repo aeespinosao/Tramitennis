@@ -43,11 +43,17 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
+    <?php
+    if (isset($saved)) {
+        echo $saved;      }
+      ?>
   </div>
+
   <div class="col-sm-9">
     <ol class="breadcrumb">
       <?php foreach($bread as $value){?>
         <li><a href="<?php echo $value[1];?>"><?php echo $value[0];?></a></li>
       <?php } ?>
+
     </ol>
   </div>
