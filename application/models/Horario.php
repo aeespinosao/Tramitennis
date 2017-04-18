@@ -21,6 +21,12 @@ class Horario extends CI_Model {
 		return $query->result();
 	}
 
+	public function get_propio($cod){
+		$this->load->database();
+		$query = $this->db->get_where('horario', array('numero' => $cod));
+		return $query->result();
+	}
+
 	public function editar_estado($num){
 		$this->load->database();
 		$resultado = []; 

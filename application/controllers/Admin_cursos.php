@@ -23,7 +23,7 @@ class Admin_cursos extends CI_Controller {
       $this->load->model('Curso');
       $cursos = [];
       $cursos = $this->Curso->get_all();
-      
+
       #var_dump($cursos);
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
@@ -65,11 +65,23 @@ class Admin_cursos extends CI_Controller {
 
 	public function editar()
 	{
+    $this->load->model('Horario');
+    $this->load->model('Curso');    
+    $codigo_curso = $this->uri->segment(3);
+    $curso_seleccionado = $this->Curso->get_curso($codigo_curso);
+    $horarios = [];
+    $horarios = $this->Horario->get_disponibles();
+    $numero_horario = $this->Curso->get_horario($codigo_curso);
+    #var_dump($numero_horario[0]->horario); 
+    $horario_propio = $this->Horario->get_propio($numero_horario[0]->horario); 
+
 		$data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																	 '2'=> array('Gestion de cursos','#'),
 																	 '3'=> array('Editar cursos',base_url().'index.php/admin_cursos/cargar_vista/editar'),
 																   '4'=> array('Editar curso','#')),
-									'curso' => array('codigo'=>'1','nombre'=>'mat','nivel'=>'principiantes','cupos'=>'8'));
+									'curso' => $curso_seleccionado,
+                  'horarios' => $horarios,
+                  'horario_propio' => $horario_propio);
 		$this->load->view('plantillas/header');
 		$this->load->view('administrador/menu',$data);
 		$this->load->view('administrador/editar_curso');

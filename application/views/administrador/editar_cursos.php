@@ -4,17 +4,20 @@
     <thead>
       <th>Código</th>
       <th>Nivel</th>
+      <th>Cupos</th>
       <th>Horario</th>
       <th></th>
     </thead>
     <tbody>
       <?php 
+
       foreach ($cursos as $curso) { ?>
         <tr>
           <td><?php echo $curso->codigo; ?></td>
           <td><?php echo $curso->nivel; ?></td>
+          <td><?php echo $curso->cupos_disponibles; ?></td>
           <td><?php echo $curso->horario; ?></td>
-          <td><a href="<?php echo base_url();?>index.php/admin_cursos/editar/<?php echo $curso['codigo'];?>" class="btn btn-primary">Editar</a></td>
+          <td><a href="<?php echo base_url();?>index.php/admin_cursos/editar/<?php echo $curso->codigo;?>" class="btn btn-primary">Editar</a></td>
         </tr>
        <?php  } ?>
 

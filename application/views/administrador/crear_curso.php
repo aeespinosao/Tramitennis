@@ -103,7 +103,7 @@
                                 <td><?php echo $horario->fecha_fin; ?></td>
                                 <td><?php echo $horario->hora; ?></td>
                                 <td><?php echo $horario->estado; ?></td>
-                                <td><?php echo $horario->cancha; ?></td>x
+                                <td><?php echo $horario->cancha; ?></td>
                               </tr>
                            <?php  } ?>
                         </div>

@@ -44,5 +44,18 @@ class Curso extends CI_Model {
         $query = $this->db->get('curso');
         return $query->result();
     }
+
+    public function get_curso($cod){
+        $this->load->database();
+        $query = $this->db->get_where('curso', array('codigo' => $cod));
+        return $query->result();
+    }
+
+    public function get_horario($cod){
+        $this->load->database();
+        $this->db->select('horario');
+        $query = $this->db->get_where('curso', array('codigo' => $cod));
+        return $query->result();
+    }
 }?>
 	
