@@ -16,7 +16,7 @@ class Admin_cursos extends CI_Controller {
                                      '3'=> array('Crear curso','#')),
                     'horarios' => $horarios,
 									'select' => '');
-		 $this->session->set_flashdata('horarios_checked',array());
+		  $this->session->set_flashdata('horarios_checked',array());
   		$this->load->view('plantillas/header');
   		$this->load->view('administrador/menu',$data);
       $this->load->view('administrador/crear_curso');
