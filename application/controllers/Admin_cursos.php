@@ -35,9 +35,13 @@ class Admin_cursos extends CI_Controller {
       $this->load->view('administrador/editar_cursos');
   		$this->load->view('plantillas/footer');
     }elseif($vista==='eliminar'){
+			$this->load->model('Curso');
+      $cursos = [];
+      $cursos = $this->Curso->get_all();
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
-                                     '3'=> array('Eliminar curso','#')));
+                                     '3'=> array('Eliminar curso','#')),
+																	'cursos' => $cursos);
   		$this->load->view('plantillas/header');
   		$this->load->view('administrador/menu',$data);
       $this->load->view('administrador/eliminar_curso');
@@ -249,34 +253,27 @@ class Admin_cursos extends CI_Controller {
 		  		$this->load->view('plantillas/footer');
 		    }
 			}
-			/*
-    $this->load->model('Horario');
-    $this->load->model('Curso');
-    $nivel = $this->input->post("selector");
-    $cupos = $this->input->post("cupos");
-    $horario = $this->input->post("horarios_seleccionados");
+	}
 
-    $horario_anterior = $this->session->flashdata('horario_propio');
-    $codigo_curso = $this->session->flashdata('codigo_curso');
-    if (is_null($horario)) {
-      $horario = $horario_anterior;
-    }else{
-      echo $horario.'::'.$horario_anterior;
-      $this->Horario->editar_estado($horario_anterior);
-      $this->Horario->editar_estado($horario);
-    }
-
-    $this->Curso->codigo = $codigo_curso;
-    $this->Curso->nivel = $nivel;
-    $this->Curso->cupos_disponibles = $cupos;
-    $this->Curso->horario = $horario;
-    if ($this->Curso->update_curso()) {
-      echo 'actualizado';
-    }
-
-
-
-
-	echo 'en proceso...';*/
+	public function eliminar(){
+		$codigo = $this->uri->segment(3);
+		$horario = $this->uri->segment(4);
+		$this->load->model('Curso');
+		$this->load->model('Horario');
+		if (!$this->Curso->delete($codigo)) {
+			$this->Horario->editar_estado($horario);
+			$this->load->model('Curso');
+      $cursos = [];
+      $cursos = $this->Curso->get_all();
+      $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
+																		 '2'=> array('Gestion de cursos','#'),
+                                     '3'=> array('Eliminar curso','#')),
+																	'cursos' => $cursos);
+			$this->session->set_flashdata('success', 'Datos eliminados correctamente');
+  		$this->load->view('plantillas/header');
+  		$this->load->view('administrador/menu',$data);
+      $this->load->view('administrador/eliminar_curso');
+  		$this->load->view('plantillas/footer');
+		}
 	}
 }

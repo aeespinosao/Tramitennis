@@ -18,7 +18,7 @@ class Curso extends CI_Model {
                 $this->codigo = isset($value->codigo) ? $value->codigo : null;
                 $this->nivel = isset($value->nivel) ? $value->nivel : null;
                 $this->cupos = isset($value->cupos) ? $value->cupos : null;
-                $this->horario = isset($value->horario) ? $value->horario : null;                
+                $this->horario = isset($value->horario) ? $value->horario : null;
             }
         }
     }
@@ -27,7 +27,7 @@ class Curso extends CI_Model {
 
         $this->load->database();
         try{
-            $this->db->insert("curso", array(                      	
+            $this->db->insert("curso", array(
                 'nivel' => $this->nivel,
                 'cupos_disponibles' => $this->cupos,
                 'horario' => $this->horario
@@ -35,7 +35,7 @@ class Curso extends CI_Model {
         }catch (Exception $e){
             return false;
         }
-        return true;	
+        return true;
 
 	}
 
@@ -50,7 +50,7 @@ class Curso extends CI_Model {
         }catch (Exception $e){
             return false;
         }
-        return true;    
+        return true;
     }
 
     public function get_all(){
@@ -78,5 +78,11 @@ class Curso extends CI_Model {
         $query = $this->db->get_where('curso', array('codigo' => $cod));
         return $query->result();
     }
+
+		public function delete($cod){
+        $this->load->database();
+        $query = $this->db->delete('curso', array('codigo' => $cod));
+        $query = $this->db->get_where('curso', array('codigo' => $cod));
+        return $query->result();
+    }
 }?>
-	
