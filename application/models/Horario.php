@@ -35,7 +35,7 @@ class Horario extends CI_Model {
 		$resultado = $this->db->get_where('horario', array('numero' => $num))->row();
 		#echo $resultado->estado;	
 		
-		if ($resultado->estado = 'disponible'){			
+		if ($resultado->estado == 'disponible'){			
 			$this->db->set('estado', 'no disponible');
 			$this->db->where('numero', $num);
 			$this->db->update('horario');
