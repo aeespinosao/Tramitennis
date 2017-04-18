@@ -8,13 +8,12 @@
       <th></th>
     </thead>
     <tbody>
-      <?php $cursos = array('curso1'=>array('codigo' => '1','nombre'=>'mat','nivel'=>'principiantes'),
-    'curso2'=>array('codigo' => '2','nombre'=>'esp','nivel'=>'principiantes'));
+      <?php 
       foreach ($cursos as $curso) { ?>
         <tr>
-          <td><?php echo $curso['codigo']; ?></td>
-          <td><?php echo $curso['nivel']; ?></td>
-          <td><?php echo /*$curso['horario']*/ 1; ?></td>
+          <td><?php echo $curso->codigo; ?></td>
+          <td><?php echo $curso->nivel; ?></td>
+          <td><?php echo $curso->horario; ?></td>
           <td><a href="<?php echo base_url();?>index.php/admin_cursos/editar/<?php echo $curso['codigo'];?>" class="btn btn-primary">Editar</a></td>
         </tr>
        <?php  } ?>
