@@ -1,6 +1,6 @@
 <div class="col-sm-9" id="contenido">
   Editar curso <?php echo $curso[0]->codigo; ?>
-  <form class="" action="index.html" method="post">
+  <?php echo form_open('admin_cursos/guardar_edicion', array('method' => 'post')) ?>
     <!--<div class="row">
         <div class="col-sm-10 col-sm-offset-1">
         	<div class="form-group">
@@ -82,16 +82,16 @@
                           <tr>
                                 <td>
                                   <div class="material-switch pull-right">
-                                    <input id="someSwitchOptionSuccess<?php echo $horario_propio->numero; ?>" name="horarios_seleccionados[]" type="checkbox" value="<?php echo $horario_propio->numero;?>"/>
-                                    <label for="someSwitchOptionSuccess<?php echo $horario_propio->numero; ?>" class="label-success"></label>
+                                    <input id="someSwitchOptionSuccess<?php echo $horario_propio[0]->numero; ?>" name="horarios_seleccionados[]" type="checkbox" value="<?php echo $horario_propio[0]->numero;?>" checked/>
+                                    <label for="someSwitchOptionSuccess<?php echo $horario_propio[0]->numero; ?>" class="label-success"></label>
                                   </div>
                                 </td>
-                                <td><?php echo $horario_propio->numero; ?></td>
-                                <td><?php echo $horario_propio->fecha_inicio; ?></td>
-                                <td><?php echo $horario_propio->fecha_fin; ?></td>
-                                <td><?php echo $horario_propio->hora; ?></td>
-                                <td><?php echo $horario_propio->estado; ?></td>
-                                <td><?php echo $horario_propio->cancha; ?></td>
+                                <td><?php echo $horario_propio[0]->numero; ?></td>
+                                <td><?php echo $horario_propio[0]->fecha_inicio; ?></td>
+                                <td><?php echo $horario_propio[0]->fecha_fin; ?></td>
+                                <td><?php echo $horario_propio[0]->hora; ?></td>
+                                <td><?php echo $horario_propio[0]->estado; ?></td>
+                                <td><?php echo $horario_propio[0]->cancha; ?></td>
                               </tr>
                           <?php foreach ($horarios as $horario) { ?>
                               <tr>
