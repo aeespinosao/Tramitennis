@@ -38,5 +38,11 @@ class Curso extends CI_Model {
         return true;	
 
 	}
+
+    public function get_all(){
+        $this->load->database();
+        $query = $this->db->get('curso');
+        return $query->result();
+    }
 }?>
 	

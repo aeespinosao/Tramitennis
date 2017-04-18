@@ -21,9 +21,15 @@ class Admin_cursos extends CI_Controller {
       $this->load->view('administrador/crear_curso');
   		$this->load->view('plantillas/footer');
     }elseif($vista==='editar'){
+      $this->load->model('Curso');
+      $cursos = [];
+      $cursos = $this->Curso->get_all();
+      
+      #var_dump($cursos);
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
-                                     '3'=> array('Editar cursos','#')));
+                                     '3'=> array('Editar cursos','#')),
+                    'cursos' => $cursos);
   		$this->load->view('plantillas/header');
   		$this->load->view('administrador/menu',$data);
       $this->load->view('administrador/editar_cursos');
