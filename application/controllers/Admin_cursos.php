@@ -15,6 +15,7 @@ class Admin_cursos extends CI_Controller {
 																		 '2'=> array('Gestion de cursos','#'),
                                      '3'=> array('Crear curso','#')),
                     'horarios' => $horarios);
+		 $this->session->set_flashdata('horarios_checked',array());
   		$this->load->view('plantillas/header');
   		$this->load->view('administrador/menu',$data);
       $this->load->view('administrador/crear_curso');
@@ -89,6 +90,7 @@ class Admin_cursos extends CI_Controller {
 	}
 
   public function crear_nuevo(){
+		$this->session->set_flashdata('horarios_checked',[]);
 		$config = array(
       array(
 							'field' => 'selector',
@@ -101,9 +103,9 @@ class Admin_cursos extends CI_Controller {
 							'rules' => 'required',
 			),
 			array(
-							'field' => 'horario',
+							'field' => 'horarios_seleccionados[]',
 							'label' => 'Horario',
-							'rules' => 'min_length[1]'
+							'rules' => 'required'
 			)
 			);
 
@@ -117,18 +119,22 @@ class Admin_cursos extends CI_Controller {
 				$data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																			 '2'=> array('Gestion de cursos','#'),
 																			 '3'=> array('Crear curso','#')),
-											'horarios' => $horarios);
+											'horarios' => $horarios,
+										   'select' => $nivel = $this->input->post("selector"));
+				$this->session->set_flashdata('cupos',$this->input->post("cupos"));
+				$this->session->set_flashdata('horarios_checked',$this->input->post("horarios_seleccionados"));
 				$this->load->view('plantillas/header');
 				$this->load->view('administrador/menu',$data);
 				$this->load->view('administrador/crear_curso');
 				$this->load->view('plantillas/footer');
+
 			}
 		else{
 			$this->load->model('Horario');
       $this->load->model('Curso');
       $nivel = $this->input->post("selector");
       $cupos = $this->input->post("cupos");
-      $horario = $this->input->post("horarios_seleccionados");      
+      $horario = $this->input->post("horarios_seleccionados");
 
       $this->Curso->nivel = $nivel;
       $this->Curso->cupos = $cupos;
@@ -136,7 +142,7 @@ class Admin_cursos extends CI_Controller {
         $this->Curso->horario = $value;
         if($this->Curso->save()){
           echo "guardado!!".$value ;
-          $this->Horario->editar_estado($value);          
+          $this->Horario->editar_estado($value);
         }
       }
       $horarios = [];
@@ -149,34 +155,9 @@ class Admin_cursos extends CI_Controller {
 			$this->load->view('plantillas/header');
 			$this->load->view('administrador/menu',$data);
 			$this->load->view('administrador/crear_curso');
-			$this->load->view('plantillas/footer');		
+			$this->load->view('plantillas/footer');
+			$this->session->unset_userdata('success');
 
 		}
-
-    /*$radios = array('principiante'=>$this->input->post("selector_principiante"),'intermedio'=>$this->input->post("selector_intermedio"),'avanzado'=>$this->input->post("selector_avanzado"),'precompetencia'=>$this->input->post("selector_precompetencia"),'seleccion'=>$this->input->post("selector_seleccion"));
-
-    foreach ($radios as $key => $radio) {
-      if ($radio == "on"){
-        $nivel  = $key;
-      }
-    }
-    $cupos = $this->input->post("cupos");
-    $horario = $this->input->post("cursos_seleccionados");
-    $codigo = $horario + 100;
-
-    $this->curso->codigo = $codigo;
-    $this->curso->nivel = $nivel;
-    $this->curso->cupos = $cupos;
-    $this->curso->horario = $horario;
-
-    if($this->curso->save()){
-      $this->horario->editar_estado($horario);
-      $data = array('bread' => array('1'=> array('Página principal','#')),
-        'saved' => 'Curso creado satisfactoriamente.');
-      $this->load->view('plantillas/header');
-      #Falta usar el saved
-      $this->load->view('administrador/menu',$data);
-      $this->load->view('plantillas/footer');
-    }*/
   }
 }

@@ -27,31 +27,36 @@
                   <span>Nivel</span>
                       <ul>
                         <li class="col-sm-2">
-                          <input type="radio" id="principiante" name="selector" value="principiante">
+                          <?php $active_radio=''; if ($select=='principiante') $active_radio='checked'; ?>
+                          <input type="radio" id="principiante" name="selector" value="principiante" <?php echo $active_radio ?>>
                           <label for="principiante">Principiante</label>
                           <div class="check"></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="intermedio" name="selector" value="intermedio">
+                          <?php $active_radio=''; if ($select=='intermedio') $active_radio='checked'; ?>
+                          <input type="radio" id="intermedio" name="selector" value="intermedio" <?php echo $active_radio ?>>
                           <label for="intermedio">Intermedio</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="avanzado" name="selector" value="avanzado">
+                          <?php $active_radio=''; if ($select=='avanzado') $active_radio='checked'; ?>
+                          <input type="radio" id="avanzado" name="selector" value="avanzado" <?php echo $active_radio ?>>
                           <label for="avanzado">Avanzado</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="precompetencia" name="selector" value="precompetencia">
+                          <?php $active_radio=''; if ($select=='precompetencia') $active_radio='checked'; ?>
+                          <input type="radio" id="precompetencia" name="selector" value="precompetencia" <?php echo $active_radio ?>>
                           <label for="precompetencia">Precompetencia</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
 
                         <li class="col-sm-2">
-                          <input type="radio" id="seleccion" name="selector" value="seleccion">
+                          <?php $active_radio=''; if ($select=='seleccion') $active_radio='checked'; ?>
+                          <input type="radio" id="seleccion" name="selector" value="seleccion" <?php echo $active_radio ?>>
                           <label for="seleccion">Selección</label>
                           <div class="check"><div class="inside"></div></div>
                         </li>
@@ -66,7 +71,7 @@
             <?php echo form_error('cupos'); ?>
               <div class="text-effect">
                   <span>Cupos</span>
-                  <input type="number" name="cupos" class="form-control focus-text" min="0"/>
+                  <input type="number" name="cupos" class="form-control focus-text" min="0" value="<?php echo $this->session->flashdata('cupos');?>"/>
               </div>
           </div>
         </div>
@@ -75,7 +80,7 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
         	<div class="form-group">
-            <?php echo form_error('horario'); ?>
+            <?php echo form_error('horarios_seleccionados[]'); ?>
             <table class="table table-hover" id="crear_cursos">
               <thead>
                 <th></th>
@@ -94,7 +99,8 @@
                               <tr>
                                 <td>
                                   <div class="material-switch pull-right">
-                                    <input id="someSwitchOptionSuccess<?php echo $horario->numero; ?>" name="horarios_seleccionados[]" type="checkbox" value="<?php echo $horario->numero;?>"/>
+                                    <?php $active_check=''; if(is_array($this->session->flashdata('horarios_checked')) AND in_array($horario->numero, $this->session->flashdata('horarios_checked'))) $active_check='checked'; ?>
+                                    <input id="someSwitchOptionSuccess<?php echo $horario->numero; ?>" name="horarios_seleccionados[]" type="checkbox" value="<?php echo $horario->numero;?>" <?php echo $active_check ?>/>
                                     <label for="someSwitchOptionSuccess<?php echo $horario->numero; ?>" class="label-success"></label>
                                   </div>
                                 </td>
