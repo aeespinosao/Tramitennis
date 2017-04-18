@@ -14,7 +14,8 @@ class Admin_cursos extends CI_Controller {
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
                                      '3'=> array('Crear curso','#')),
-                    'horarios' => $horarios);
+                    'horarios' => $horarios,
+									'select' => '');
 		 $this->session->set_flashdata('horarios_checked',array());
   		$this->load->view('plantillas/header');
   		$this->load->view('administrador/menu',$data);
