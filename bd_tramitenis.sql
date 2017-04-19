@@ -222,3 +222,12 @@ INSERT INTO `horario`(`fecha_inicio`, `hora`, `cancha`, `fecha_fin`) VALUES (dat
   date('2017-5-30')),(date('2017-4-14'),time('17:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('18:00'),'2',
   date('2017-5-30')),(date('2017-4-14'),time('19:00'),'2',date('2017-5-30')),(date('2017-4-14'),time('20:00'),'2',
   date('2017-5-30'));
+
+CREATE TABLE matricula
+(
+  codigo_curso INT(20),
+  cedula_jugador INT(20),
+  CONSTRAINT matricula_codigo_curso_cedula_jugador_pk PRIMARY KEY (codigo_curso, cedula_jugador),
+  CONSTRAINT matricula_curso_fk FOREIGN KEY (codigo_curso) REFERENCES curso (codigo),
+  CONSTRAINT matricula_jugador_fk FOREIGN KEY (cedula_jugador) REFERENCES jugador (cedula)
+);

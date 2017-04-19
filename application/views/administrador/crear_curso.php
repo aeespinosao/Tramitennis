@@ -6,7 +6,7 @@
         <?php echo $this->session->flashdata('success');?>
       </div>
   <?php } ?>
-  Crear curso
+  <h3>Crear curso</h3>
 
   <?php echo form_open('admin_cursos/crear_nuevo', array('method' => 'post')) ?>
     <!--<div class="row">
@@ -24,7 +24,7 @@
         	<div class="form-group">
             <?php echo form_error('selector'); ?>
               <div class="radio">
-                  <span>Nivel</span>
+                  <h4>Selecione nivel</h4>
                       <ul>
                         <li class="col-sm-2">
                           <?php $active_radio=''; if ($select=='principiante') $active_radio='checked'; ?>
@@ -70,7 +70,7 @@
         	<div class="form-group">
             <?php echo form_error('cupos'); ?>
               <div class="text-effect">
-                  <span>Cupos</span>
+                  <h4><span>Numero de cupos</span></h4>
                   <input type="number" name="cupos" class="form-control focus-text" min="0" value="<?php echo $this->session->flashdata('cupos');?>"/>
               </div>
           </div>
@@ -81,6 +81,7 @@
         <div class="col-sm-10 col-sm-offset-1">
         	<div class="form-group">
             <?php echo form_error('horarios_seleccionados[]'); ?>
+            <h4>Seleccione horario</h4>
             <table class="table table-hover" id="crear_cursos">
               <thead>
                 <th></th>
