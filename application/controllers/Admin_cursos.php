@@ -84,9 +84,42 @@ class Admin_cursos extends CI_Controller {
       $this->load->view('jugador/matricula');
   		$this->load->view('plantillas/footer');
     }elseif($vista==='cancelar'){
-      $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/jugador'),
-																		 '2'=> array('Gestion de cursos','#'),
-                                     '3'=> array('Cancelar curso','#')));
+
+        $this->load->model('Curso');
+        $mis_cursos = [];
+        $jugador = null;
+        if($jugador = $this->Curso->get_current_jugador()){
+            $mis_cursos = $this->Curso->get_mis_cursos($jugador);
+        }
+
+        $this->db->reset_query();
+        $this->load->model('Horario');
+        $cursos = [];
+
+        if(count($mis_cursos) > 0){
+            $this->db->select('*');
+            $this->db->from('curso');
+            $this->db->where_in('codigo', $mis_cursos);
+            $query = $this->db->get();
+
+
+            foreach ($query->result() as &$curso){
+                $horarios =  $this->Horario->get_propio($curso->horario);
+                $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
+                $cursos[] = $curso;
+            }
+        }
+
+
+      $data = array(
+          'bread' => array(
+              '1'=> array('Página principal',base_url().'index.php/login/jugador'),
+              '2'=> array('Gestion de cursos','#'),
+              '3'=> array('Cancelar curso','#')
+          ),
+          'cursos' => $cursos,
+          'jugador' => $jugador,
+      );
   		$this->load->view('plantillas/header');
   		$this->load->view('jugador/menu',$data);
       $this->load->view('jugador/cancelar');
@@ -343,6 +376,60 @@ class Admin_cursos extends CI_Controller {
         $this->load->view('plantillas/header');
         $this->load->view('jugador/menu',$data);
         $this->load->view('jugador/matricula');
+        $this->load->view('plantillas/footer');
+    }
+
+
+    public function eliminar_matricula(){
+        $codigo = $this->uri->segment(3);
+        $cedula = $this->uri->segment(4);
+        $this->load->database();
+
+        $this->db->delete('matricula', array('codigo_curso' => $codigo, 'cedula_jugador' => $cedula));
+
+
+        $this->load->model('Curso');
+        $mis_cursos = [];
+        $jugador = null;
+        if($jugador = $this->Curso->get_current_jugador()){
+            $mis_cursos = $this->Curso->get_mis_cursos($jugador);
+        }
+
+        $this->db->reset_query();
+
+
+        $this->load->model('Horario');
+
+        $cursos = [];
+
+        if(count($mis_cursos) > 0){
+            $this->db->select('*');
+            $this->db->from('curso');
+            $this->db->where_in('codigo', $mis_cursos);
+            $query = $this->db->get();
+
+
+            foreach ($query->result() as &$curso){
+                $horarios =  $this->Horario->get_propio($curso->horario);
+                $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
+                $cursos[] = $curso;
+            }
+        }
+
+
+
+        $data = array(
+            'bread' => array(
+                '1'=> array('Página principal',base_url().'index.php/login/jugador'),
+                '2'=> array('Gestion de cursos','#'),
+                '3'=> array('Cancelar curso','#')
+            ),
+            'cursos' => $cursos,
+            'jugador' => $jugador,
+        );
+        $this->load->view('plantillas/header');
+        $this->load->view('jugador/menu',$data);
+        $this->load->view('jugador/cancelar');
         $this->load->view('plantillas/footer');
     }
 }
