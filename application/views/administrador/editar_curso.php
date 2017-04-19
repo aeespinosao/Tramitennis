@@ -1,5 +1,5 @@
 <div class="col-sm-9" id="contenido">
-  Editar curso <?php echo $curso[0]->codigo; ?>
+  <h3>Editar curso <?php echo $curso[0]->codigo; ?></h3> 
   <?php echo form_open('admin_cursos/guardar_edicion', array('method' => 'post')) ?>
     <!--<div class="row">
         <div class="col-sm-10 col-sm-offset-1">
@@ -16,7 +16,7 @@
         	<div class="form-group">
             <?php echo form_error('selector'); ?>
               <div class="radio">
-                  <span>Nivel</span>
+                  <h4>Nivel</h4>
                       <ul>
                         <li class="col-sm-2">
                           <?php $active_radio=''; if ($select=='principiante') $active_radio='checked'; ?>
@@ -62,7 +62,7 @@
         	<div class="form-group">
             <?php echo form_error('cupos'); ?>
               <div class="text-effect">
-                  <span>Cupos</span>
+                  <h4><span>Cupos</span></h4>
                   <input type="number" name="cupos" class="form-control focus-text" min="0" value="<?php echo $curso[0]->cupos_disponibles; ?>"/>
               </div>
           </div>
@@ -72,6 +72,7 @@
         <div class="col-sm-10 col-sm-offset-1">
           <div class="form-group">
             <?php echo form_error('horarios_seleccionados[]'); ?>
+            <h4>Horario</h4>
             <table class="table table-hover" id="crear_cursos">
               <thead>
                 <th></th>

@@ -6,12 +6,15 @@
         <?php echo $this->session->flashdata('success');?>
       </div>
   <?php } ?>
-  Eliminar cursos
+  <h3>Eliminar cursos</h3> 
   <table class="table table-hover" id="editar_cursos">
     <thead>
       <th>Código</th>
       <th>Nombre</th>
       <th>Horario</th>
+      <th>Fecha de inicio</th>
+      <th>Fecha de finalizacion</th>
+      <th>Hora</th>
       <th></th>
     </thead>
     <tbody>
@@ -20,7 +23,10 @@
         <tr>
           <td><?php echo $curso->codigo; ?></td>
           <td><?php echo $curso->nivel; ?></td>
-          <td><?php echo $curso->horario; ?></td>
+          <td><?php if($curso->horarioObj) echo $curso->horarioObj->numero; ?></td>
+          <td><?php if($curso->horarioObj) echo $curso->horarioObj->fecha_inicio; ?></td>
+          <td><?php if($curso->horarioObj) echo $curso->horarioObj->fecha_fin; ?></td>
+          <td><?php if($curso->horarioObj) echo $curso->horarioObj->hora; ?></td>
           <td><a href="<?php echo base_url();?>index.php/admin_cursos/eliminar/<?php echo $curso->codigo."/".$curso->horario;?>" onclick="return confirmation()" class="btn btn-danger">Eliminar</a></td>
         </tr>
        <?php  } ?>
