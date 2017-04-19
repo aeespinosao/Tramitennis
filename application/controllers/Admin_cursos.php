@@ -47,9 +47,38 @@ class Admin_cursos extends CI_Controller {
       $this->load->view('administrador/eliminar_curso');
   		$this->load->view('plantillas/footer');
     }elseif($vista==='matricular'){
-      $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/jugador'),
-																		 '2'=> array('Gestion de cursos','#'),
-                                     '3'=> array('Matricular curso','#')));
+        $this->load->model('Curso');
+        $cursos = [];
+        $mis_cursos = [];
+        if($jugador = $this->Curso->get_current_jugador()){
+            $mis_cursos = $this->Curso->get_mis_cursos($jugador);
+            if(count($mis_cursos) >= 2){
+                $cursos = [];
+            }else{
+                $cursos = $this->Curso->get_for_matricula($jugador);
+            }
+
+        }
+
+        $this->db->reset_query();
+
+
+        $this->load->model('Horario');
+
+
+        foreach ($cursos as &$curso){
+            $horarios =  $this->Horario->get_propio($curso->horario);
+            $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
+        }
+
+      $data = array(
+          'bread' => array(
+              '1'=> array('Página principal',base_url().'index.php/login/jugador'),
+              '2'=> array('Gestion de cursos','#'),
+              '3'=> array('Matricular curso','#')
+          ),
+          'cursos' => $cursos
+      );
   		$this->load->view('plantillas/header');
   		$this->load->view('jugador/menu',$data);
       $this->load->view('jugador/matricula');
@@ -120,7 +149,7 @@ class Admin_cursos extends CI_Controller {
       foreach ($horario as $value) {
         $this->Curso->horario = $value;
         if($this->Curso->save()){
-          echo "guardado!!".$value ;
+          //echo "guardado!!".$value ;
           $this->Horario->editar_estado($value);
         }
       }
@@ -276,4 +305,44 @@ class Admin_cursos extends CI_Controller {
   		$this->load->view('plantillas/footer');
 		}
 	}
+
+	public function matricular_cursos(){
+        $this->load->database();
+        $this->load->model('Curso');
+        if($jugador = $this->Curso->get_current_jugador()){
+            $cursos = $this->input->post('cursos');
+            foreach ($cursos as $codigo_curso){
+                $this->db->insert('matricula', array(
+                    'codigo_curso' => $codigo_curso,
+                    'cedula_jugador' => $jugador->cedula
+                ));
+            }
+        }
+
+        $cursos = [];
+        if($jugador = $this->Curso->get_current_jugador()){
+            $cursos = $this->Curso->get_for_matricula($jugador);
+        }
+
+        $this->load->model('Horario');
+
+        foreach ($cursos as &$curso){
+            $horarios =  $this->Horario->get_propio($curso->horario);
+            $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
+        }
+
+        $data = array(
+            'bread' => array(
+                '1'=> array('Página principal',base_url().'index.php/login/jugador'),
+                '2'=> array('Gestion de cursos','#'),
+                '3'=> array('Matricular curso','#')
+            ),
+            'cursos' => $cursos,
+            'guardado' => true
+        );
+        $this->load->view('plantillas/header');
+        $this->load->view('jugador/menu',$data);
+        $this->load->view('jugador/matricula');
+        $this->load->view('plantillas/footer');
+    }
 }
