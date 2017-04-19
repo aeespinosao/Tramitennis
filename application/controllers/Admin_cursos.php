@@ -254,12 +254,8 @@ class Admin_cursos extends CI_Controller {
 							'field' => 'cupos',
 							'label' => 'Cupos',
 							'rules' => 'required',
-			),
-			array(
-							'field' => 'horarios_seleccionados[]',
-							'label' => 'Horario',
-							'rules' => 'required'
 			)
+			
 			);
 			$this->form_validation->set_rules($config);
 			if ($this->form_validation->run() == FALSE)
@@ -312,14 +308,19 @@ class Admin_cursos extends CI_Controller {
 		    $this->Curso->horario = $horario;
 		    if ($this->Curso->update_curso()) {
 					$this->load->model('Curso');
+          $this->load->model('Horario');
 		      $cursos = [];
 		      $cursos = $this->Curso->get_all();
+          foreach ($cursos as &$curso) {
+            $horarios = $this->Horario->get_propio($curso->horario);
+            $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
+          } 
 		      #var_dump($cursos);
 		      $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																				 '2'=> array('Gestion de cursos','#'),
 		                                     '3'=> array('Editar cursos','#')),
 		                    'cursos' => $cursos);
-				  $this->session->set_flashdata('success', 'Datos actualizados correctamente');
+				  $this->session->set_flashdata('success', 'Curso actualizado correctamente');
 		  		$this->load->view('plantillas/header');
 		  		$this->load->view('administrador/menu',$data);
 		      $this->load->view('administrador/editar_cursos');
