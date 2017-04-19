@@ -21,10 +21,31 @@
           <td><?php echo $curso->codigo; ?></td>
           <td><?php echo $curso->nivel; ?></td>
           <td><?php echo $curso->horario; ?></td>
-          <td><a href="<?php echo base_url();?>index.php/admin_cursos/eliminar/<?php echo $curso->codigo."/".$curso->horario;?>" class="btn btn-danger">Eliminar</a></td>
+          <td><a href="<?php echo base_url();?>index.php/admin_cursos/eliminar/<?php echo $curso->codigo."/".$curso->horario;?>" onclick="return confirmation()" class="btn btn-danger">Eliminar</a></td>
         </tr>
        <?php  } ?>
 
     </tbody>
   </table>
 </div>
+<script type="text/javascript">
+
+<!--
+
+function confirmation() {
+
+    if(confirm("¿Desea eliminar eliminar el curso?"))
+
+    {
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
+//-->
+
+</script>
