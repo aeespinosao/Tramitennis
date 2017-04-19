@@ -1,7 +1,7 @@
 <?php if(isset($guardado)) { ?>
     <div class="alert alert-success">
         <i class="fa fa-check-square-o" aria-hidden="true"></i>
-        Datos insertados correctamente
+        Inscripción satisfactoria
     </div>
 <?php } ?>
 <div class="col-sm-9">
