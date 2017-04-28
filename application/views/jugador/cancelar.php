@@ -43,7 +43,7 @@
 <script>
     function confirmation() {
 
-        if(confirm("¿Desea eliminar eliminar el curso?"))
+        if(confirm("¿Desea cancelar el curso?"))
 
         {
 
