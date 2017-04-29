@@ -23,9 +23,7 @@ class Curso extends CI_Model {
         }
     }
 
-	public function save(){
-
-        $this->load->database();
+	public function guardar(){
         try{
             $this->db->insert("curso", array(
                 'nivel' => $this->nivel,
@@ -39,7 +37,7 @@ class Curso extends CI_Model {
 
 	}
 
-    public function update_curso(){
+    public function actualizar_curso(){
         $this->load->database();
         try{
             $this->db->set('nivel', $this->nivel);
@@ -53,13 +51,13 @@ class Curso extends CI_Model {
         return true;
     }
 
-    public function get_all(){
+    public function obtener_cursos(){
         $this->load->database();
         $query = $this->db->get('curso');
         return $query->result();
     }
 
-    public function get_all_where_in($cursos){
+    public function obtener_cursos_where_in($cursos){
 
         $return = [];
 
@@ -73,7 +71,7 @@ class Curso extends CI_Model {
 
 
         foreach ($query->result() as &$curso){
-            $horarios =  $this->Horario->get_propio($curso->horario);
+            $horarios =  $this->Horario->obtener_horario_curso($curso->horario);
             $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
             $return[] = $curso;
         }
@@ -81,27 +79,57 @@ class Curso extends CI_Model {
         return $return;
     }
 
-    public function get_curso($cod){
+    public function obtener_matricula($jugador){
         $this->load->database();
+        $mis_cursos = $this->obtener_cursos_jugador($jugador);
+        $query = $this->db->get_where('curso', array('nivel' => $jugador->nivel));
+
+        $cursos = [];
+        foreach ($query->result() as $curso){
+            if (!in_array($curso->codigo, $mis_cursos)) {
+                $cursos[] = $curso ;
+            }
+        }
+
+
+
+        return $cursos;
+    }
+
+    public function obtener_cursos_jugador($jugador){
+        $this->load->database();
+        $this->db->select('codigo_curso');
+        $query = $this->db->get_where('matricula', array(
+            'cedula_jugador' => $jugador->cedula
+        ));
+
+        $mis_cursos = [];
+        foreach($query->result() as $row)
+            $mis_cursos[] = $row->codigo_curso;
+
+        return $mis_cursos;
+    }
+
+    public function obtener_curso($cod){
         $query = $this->db->get_where('curso', array('codigo' => $cod));
         return $query->result();
     }
 
-    public function get_horario($cod){
+    public function obtener_horario($cod){
         $this->load->database();
         $this->db->select('horario');
         $query = $this->db->get_where('curso', array('codigo' => $cod));
         return $query->result();
     }
 
-    public function get_nivel($cod){
+    public function obtener_nivel($cod){
         $this->load->database();
         $this->db->select('nivel');
         $query = $this->db->get_where('curso', array('codigo' => $cod));
         return $query->result();
     }
 
-		public function delete($cod){
+    public function eliminar_curso($cod){
         $this->load->database();
         $query = $this->db->delete('curso', array('codigo' => $cod));
         $query = $this->db->get_where('curso', array('codigo' => $cod));

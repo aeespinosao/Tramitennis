@@ -8,8 +8,7 @@ class Jugador extends CI_Model {
     public $dependencia;
     public $nivel;
 
-    public function get_current_jugador(){
-        $this->load->database();
+    public function obtener_jugador_actual(){
         $query = $this->db->get('jugador');
         $jugadores = $query->result();
         if(count($jugadores) > 0) return $jugadores[0];
@@ -17,4 +16,3 @@ class Jugador extends CI_Model {
     }
 
 }?>
-	

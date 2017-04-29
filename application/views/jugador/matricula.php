@@ -1,18 +1,18 @@
-<?php if(isset($guardado)) { ?>
-    <?php if($guardado) { ?>
-        <div class="alert alert-success">
-            <i class="fa fa-check-square-o" aria-hidden="true"></i>
-            Inscripción satisfactoria
-        </div>
-    <?php } else { ?>
-        <div class="alert alert-danger">
-            <i class="fa fa-check-square-o" aria-hidden="true"></i>
-            No se puede matricular a 0 o mas de 2 cursos, tampoco a cursos con el cupo lleno
-        </div>
-    <?php } ?>
-<?php } ?>
 <div class="col-sm-9">
-  Matricular curso
+    <?php if(isset($guardado)) { ?>
+        <?php if($guardado) { ?>
+            <div class="alert alert-success">
+                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                Inscripción satisfactoria
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger">
+                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                No se puede matricular a 0 o mas de 2 cursos, tampoco a cursos con el cupo lleno
+            </div>
+        <?php } ?>
+    <?php } ?>
+    Matricular curso
   <?php echo form_open('admin_cursos/matricular_cursos', array('method' => 'post')) ?>
     <table class="table table-hover" id="matricular_cursos">
       <thead>
