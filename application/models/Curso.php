@@ -89,6 +89,10 @@ class Curso extends CI_Model {
     }
 
     public function obtener_curso($cod){
+		    $query = $this->db->get_where('curso', array('codigo' => $cod));
+		    return $query->result();
+		}
+    public function get_curso($cod){
         $this->load->database();
         $query = $this->db->get_where('curso', array('codigo' => $cod));
         return $query->result();
@@ -115,11 +119,4 @@ class Curso extends CI_Model {
         return $query->result();
     }
 
-    public function get_current_jugador(){
-        $this->load->database();
-        $query = $this->db->get('jugador');
-        $jugadores = $query->result();
-        if(count($jugadores) > 0) return $jugadores[0];
-        return false;
-    }
 }?>
