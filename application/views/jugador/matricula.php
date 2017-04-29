@@ -2,7 +2,7 @@
     <?php if($guardado) { ?>
         <div class="alert alert-success">
             <i class="fa fa-check-square-o" aria-hidden="true"></i>
-            Datos insertados correctamente
+            Inscripción satisfactoria
         </div>
     <?php } else { ?>
         <div class="alert alert-danger">
