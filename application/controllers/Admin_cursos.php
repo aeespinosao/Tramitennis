@@ -370,10 +370,9 @@ class Admin_cursos extends CI_Controller {
 
         if($jugador = $this->Jugador->get_current_jugador()){
             $cursos = $this->input->post('cursos');
+            if(count($cursos) <= 0 || !$this->Matricula->validar_matriculas($cursos, $jugador)) $guardado = false;
 
-            if(!$this->Matricula->validar_matriculas($cursos, $jugador)) $guardado = false;
-
-            if($guardado){
+            if($guardado && count($cursos) > 0){
                 foreach ($cursos as $codigo_curso){
                     $this->Matricula->codigo_curso = $codigo_curso;
                     $this->Matricula->cedula_jugador = $jugador->cedula;
