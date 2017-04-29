@@ -1,8 +1,15 @@
 <?php if(isset($guardado)) { ?>
-    <div class="alert alert-success">
-        <i class="fa fa-check-square-o" aria-hidden="true"></i>
-        Inscripción satisfactoria
-    </div>
+    <?php if($guardado) { ?>
+        <div class="alert alert-success">
+            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+            Inscripción satisfactoria
+        </div>
+    <?php } else { ?>
+        <div class="alert alert-danger">
+            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+            No se puede matricular menos de 1 o mas de 2 cursos
+        </div>
+    <?php } ?>
 <?php } ?>
 <div class="col-sm-9">
   Matricular curso

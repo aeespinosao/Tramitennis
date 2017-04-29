@@ -60,14 +60,16 @@ class Admin_cursos extends CI_Controller {
   		$this->load->view('plantillas/footer');
     }elseif($vista==='matricular'){
         $this->load->model('Curso');
+        $this->load->model('Matricula');
+        $this->load->model('Jugador');
         $cursos = [];
         $mis_cursos = [];
-        if($jugador = $this->Curso->get_current_jugador()){
-            $mis_cursos = $this->Curso->get_mis_cursos($jugador);
+        if($jugador = $this->Jugador->get_current_jugador()){
+            $mis_cursos = $this->Matricula->get_mis_cursos($jugador);
             if(count($mis_cursos) >= 2){
                 $cursos = [];
             }else{
-                $cursos = $this->Curso->get_for_matricula($jugador);
+                $cursos = $this->Matricula->get_for_matricula($jugador);
             }
 
         }
@@ -96,10 +98,12 @@ class Admin_cursos extends CI_Controller {
     }elseif($vista==='cancelar'){
 
         $this->load->model('Curso');
+        $this->load->model('Jugador');
+        $this->load->model('Matricula');
         $mis_cursos = [];
         $jugador = null;
-        if($jugador = $this->Curso->get_current_jugador()){
-            $mis_cursos = $this->Curso->get_mis_cursos($jugador);
+        if($jugador = $this->Jugador->get_current_jugador()){
+            $mis_cursos = $this->Matricula->get_mis_cursos($jugador);
         }
 
         $this->db->reset_query();
@@ -336,21 +340,30 @@ class Admin_cursos extends CI_Controller {
 	}
 
 	public function matricular_cursos(){
-        $this->load->database();
+        $guardado = true;
+	    $this->load->database();
         $this->load->model('Curso');
-        if($jugador = $this->Curso->get_current_jugador()){
+        $this->load->model('Matricula');
+        $this->load->model('Jugador');
+
+
+
+        if($jugador = $this->Jugador->get_current_jugador()){
             $cursos = $this->input->post('cursos');
-            foreach ($cursos as $codigo_curso){
-                $this->db->insert('matricula', array(
-                    'codigo_curso' => $codigo_curso,
-                    'cedula_jugador' => $jugador->cedula
-                ));
+            if(count($cursos) <= 0 || !$this->Matricula->validar_matriculas($cursos, $jugador)) $guardado = false;
+
+            if($guardado && count($cursos) > 0){
+                foreach ($cursos as $codigo_curso){
+                    $this->Matricula->codigo_curso = $codigo_curso;
+                    $this->Matricula->cedula_jugador = $jugador->cedula;
+                    $this->Matricula->save();
+                }
             }
         }
 
         $cursos = [];
-        if($jugador = $this->Curso->get_current_jugador()){
-            $cursos = $this->Curso->get_for_matricula($jugador);
+        if($jugador = $this->Jugador->get_current_jugador()){
+            $cursos = $this->Matricula->get_for_matricula($jugador);
         }
 
         $this->load->model('Horario');
@@ -367,7 +380,7 @@ class Admin_cursos extends CI_Controller {
                 '3'=> array('Matricular curso','#')
             ),
             'cursos' => $cursos,
-            'guardado' => true
+            'guardado' => $guardado
         );
         $this->load->view('plantillas/header');
         $this->load->view('jugador/menu',$data);
@@ -377,18 +390,22 @@ class Admin_cursos extends CI_Controller {
 
 
     public function eliminar_matricula(){
+
+        $this->load->model('Matricula');
+        $this->load->model('Curso');
+        $this->load->model('Jugador');
+
         $codigo = $this->uri->segment(3);
         $cedula = $this->uri->segment(4);
         $this->load->database();
+        $this->Matricula->codigo_curso = $codigo;
+        $this->Matricula->cedula_jugador = $cedula;
+        $this->Matricula->delete();
 
-        $this->db->delete('matricula', array('codigo_curso' => $codigo, 'cedula_jugador' => $cedula));
-
-
-        $this->load->model('Curso');
         $mis_cursos = [];
         $jugador = null;
-        if($jugador = $this->Curso->get_current_jugador()){
-            $mis_cursos = $this->Curso->get_mis_cursos($jugador);
+        if($jugador = $this->Jugador->get_current_jugador()){
+            $mis_cursos = $this->Matricula->get_mis_cursos($jugador);
         }
 
         $this->db->reset_query();
