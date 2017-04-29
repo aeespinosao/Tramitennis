@@ -9,7 +9,7 @@ class Admin_cursos extends CI_Controller {
     if($vista==='crear'){
       $this->load->model('Horario');
       $horarios = [];
-      $horarios = $this->Horario->get_disponibles();
+      $horarios = $this->Horario->obtener_disponibles();
 
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
@@ -26,13 +26,12 @@ class Admin_cursos extends CI_Controller {
       $this->load->model('Curso');
       $this->load->model('Horario');
       $cursos = [];
-      $cursos = $this->Curso->get_all();
+      $cursos = $this->Curso->obtener_cursos();
 
-      foreach ($cursos as &$curso) {
-        $horarios = $this->Horario->get_propio($curso->horario);
+      foreach ($cursos as $curso) {
+        $horarios = $this->Horario->obtener_horario_curso($curso->horario);
         $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
       }
-      #var_dump($cursos);
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
                                      '3'=> array('Editar cursos','#')),
@@ -46,9 +45,9 @@ class Admin_cursos extends CI_Controller {
 			$this->load->model('Curso');
       $this->load->model('Horario');
       $cursos = [];
-      $cursos = $this->Curso->get_all();
+      $cursos = $this->Curso->obtener_cursos();
       foreach ($cursos as &$curso) {
-        $horarios = $this->Horario->get_propio($curso->horario);
+        $horarios = $this->Horario->obtener_horario_curso($curso->horario);
         $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
       }
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
@@ -78,7 +77,7 @@ class Admin_cursos extends CI_Controller {
         $this->load->model('Horario');
 
         foreach ($cursos as &$curso){
-            $horarios =  $this->Horario->get_propio($curso->horario);
+            $horarios =  $this->Horario->obtener_horario_curso($curso->horario);
             $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
         }
 
@@ -115,7 +114,7 @@ class Admin_cursos extends CI_Controller {
 
 
             foreach ($query->result() as &$curso){
-                $horarios =  $this->Horario->get_propio($curso->horario);
+                $horarios =  $this->Horario->obtener_horario_curso($curso->horario);
                 $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
                 $cursos[] = $curso;
             }
@@ -141,8 +140,7 @@ class Admin_cursos extends CI_Controller {
 
 	}
 
-  public function crear_nuevo(){
-		$this->session->set_flashdata('horarios_checked',[]);
+	public function validar(){
 		$config = array(
       array(
 							'field' => 'selector',
@@ -160,14 +158,16 @@ class Admin_cursos extends CI_Controller {
 							'rules' => 'required'
 			)
 			);
-
-
 			$this->form_validation->set_rules($config);
-		if ($this->form_validation->run() == FALSE)
+			return $this->form_validation->run();
+	}
+
+  public function crear_nuevo(){
+		$this->session->set_flashdata('horarios_checked',[]);
+		if ($this->validar() == FALSE)
 	    {
 				$this->load->model('Horario');
-	      $horarios = [];
-	      $horarios = $this->Horario->get_disponibles();
+	      $horarios = $this->Horario->obtener_disponibles();
 				$data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																			 '2'=> array('Gestion de cursos','#'),
 																			 '3'=> array('Crear curso','#')),
@@ -179,26 +179,22 @@ class Admin_cursos extends CI_Controller {
 				$this->load->view('administrador/menu',$data);
 				$this->load->view('administrador/crear_curso');
 				$this->load->view('plantillas/footer');
-
 			}
 		else{
 			$this->load->model('Horario');
       $this->load->model('Curso');
       $nivel = $this->input->post("selector");
       $cupos = $this->input->post("cupos");
-      $horario = $this->input->post("horarios_seleccionados");
-
+      $horarios = $this->input->post("horarios_seleccionados");
       $this->Curso->nivel = $nivel;
       $this->Curso->cupos = $cupos;
-      foreach ($horario as $value) {
-        $this->Curso->horario = $value;
-        if($this->Curso->save()){
-          //echo "guardado!!".$value ;
-          $this->Horario->editar_estado($value);
+      foreach ($horarios as $horario) {
+        $this->Curso->horario = $horario;
+        if($this->Curso->guardar()){
+          $this->Horario->editar_estado($horario);
         }
       }
-      $horarios = [];
-      $horarios = $this->Horario->get_disponibles();
+      $horarios = $this->Horario->obtener_disponibles();
 			$data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
 																		 '2'=> array('Gestion de cursos','#'),
 																		 '3'=> array('Crear curso','#')),
@@ -219,13 +215,11 @@ class Admin_cursos extends CI_Controller {
     $this->load->model('Horario');
     $this->load->model('Curso');
     $codigo_curso = $this->uri->segment(3);
-    $curso_seleccionado = $this->Curso->get_curso($codigo_curso);
-    $horarios = [];
-    $horarios = $this->Horario->get_disponibles();
-    $numero_horario = $this->Curso->get_horario($codigo_curso);
-    $nivel = $this->Curso->get_nivel($codigo_curso);
-    #var_dump($numero_horario[0]->horario);
-    $horario_propio = $this->Horario->get_propio($numero_horario[0]->horario);
+    $curso_seleccionado = $this->Curso->obtener_curso($codigo_curso);
+    $horarios = $this->Horario->obtener_disponibles();
+    $numero_horario = $this->Curso->obtener_horario($codigo_curso);
+    $nivel = $this->Curso->obtener_nivel($codigo_curso);
+    $horario_propio = $this->Horario->obtener_horario_curso($numero_horario[0]->horario);
     $this->session->set_flashdata('horario_propio', $horario_propio[0]->numero);
     $this->session->set_flashdata('codigo_curso', $codigo_curso);
 
@@ -244,32 +238,18 @@ class Admin_cursos extends CI_Controller {
   }
 
   public function guardar_edicion(){
-		$config = array(
-      array(
-							'field' => 'selector',
-							'label' => 'Nivel',
-							'rules' => 'required'
-			),
-			array(
-							'field' => 'cupos',
-							'label' => 'Cupos',
-							'rules' => 'required',
-			)
-
-			);
-			$this->form_validation->set_rules($config);
-			if ($this->form_validation->run() == FALSE)
+			if ($this->validar() == FALSE)
 		    {
 					$this->load->model('Horario');
 			    $this->load->model('Curso');
 			    $codigo_curso = $codigo_curso = $this->session->flashdata('codigo_curso');
-			    $curso_seleccionado = $this->Curso->get_curso($codigo_curso);
+			    $curso_seleccionado = $this->Curso->obtener_curso($codigo_curso);
 			    $horarios = [];
-			    $horarios = $this->Horario->get_disponibles();
-			    $numero_horario = $this->Curso->get_horario($codigo_curso);
-			    $nivel = $this->Curso->get_nivel($codigo_curso);
+			    $horarios = $this->Horario->obtener_disponibles();
+			    $numero_horario = $this->Curso->obtener_horario($codigo_curso);
+			    $nivel = $this->Curso->obtener_nivel($codigo_curso);
 			    #var_dump($numero_horario[0]->horario);
-			    $horario_propio = $this->Horario->get_propio($numero_horario[0]->horario);
+			    $horario_propio = $this->Horario->obtener_horario_curso($numero_horario[0]->horario);
 			    $this->session->set_flashdata('horario_propio', $horario_propio[0]->numero);
 			    $this->session->set_flashdata('codigo_curso', $codigo_curso);
 
@@ -306,13 +286,13 @@ class Admin_cursos extends CI_Controller {
 		    $this->Curso->nivel = $nivel;
 		    $this->Curso->cupos_disponibles = $cupos;
 		    $this->Curso->horario = $horario;
-		    if ($this->Curso->update_curso()) {
+		    if ($this->Curso->actualizar_curso()) {
 					$this->load->model('Curso');
           $this->load->model('Horario');
 		      $cursos = [];
-		      $cursos = $this->Curso->get_all();
-          foreach ($cursos as &$curso) {
-            $horarios = $this->Horario->get_propio($curso->horario);
+		      $cursos = $this->Curso->obtener_cursos();
+          foreach ($cursos as $curso) {
+            $horarios = $this->Horario->obtener_horario_curso($curso->horario);
             $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
           }
 		      #var_dump($cursos);
@@ -334,13 +314,13 @@ class Admin_cursos extends CI_Controller {
 		$horario = $this->uri->segment(4);
 		$this->load->model('Curso');
 		$this->load->model('Horario');
-		if (!$this->Curso->delete($codigo)) {
+		if (!$this->Curso->eliminar_curso($codigo)) {
 			$this->Horario->editar_estado($horario);
 			$this->load->model('Curso');
       $cursos = [];
-      $cursos = $this->Curso->get_all();
+      $cursos = $this->Curso->obtener_cursos();
 			foreach ($cursos as &$curso) {
-				$horarios = $this->Horario->get_propio($curso->horario);
+				$horarios = $this->Horario->obtener_horario_curso($curso->horario);
 				$curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
 			}
       $data = array('bread' => array('1'=> array('Página principal',base_url().'index.php/login/administrador'),
@@ -376,7 +356,7 @@ class Admin_cursos extends CI_Controller {
         $this->load->model('Horario');
 
         foreach ($cursos as &$curso){
-            $horarios =  $this->Horario->get_propio($curso->horario);
+            $horarios =  $this->Horario->obtener_horario_curso($curso->horario);
             $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
         }
 
@@ -426,7 +406,7 @@ class Admin_cursos extends CI_Controller {
 
 
             foreach ($query->result() as &$curso){
-                $horarios =  $this->Horario->get_propio($curso->horario);
+                $horarios =  $this->Horario->obtener_horario_curso($curso->horario);
                 $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
                 $cursos[] = $curso;
             }

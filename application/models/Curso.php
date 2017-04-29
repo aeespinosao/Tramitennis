@@ -23,9 +23,7 @@ class Curso extends CI_Model {
         }
     }
 
-	public function save(){
-
-        $this->load->database();
+	public function guardar(){
         try{
             $this->db->insert("curso", array(
                 'nivel' => $this->nivel,
@@ -39,7 +37,7 @@ class Curso extends CI_Model {
 
 	}
 
-    public function update_curso(){
+    public function actualizar_curso(){
         $this->load->database();
         try{
             $this->db->set('nivel', $this->nivel);
@@ -53,7 +51,7 @@ class Curso extends CI_Model {
         return true;
     }
 
-    public function get_all(){
+    public function obtener_cursos(){
         $this->load->database();
         $query = $this->db->get('curso');
         return $query->result();
@@ -90,27 +88,27 @@ class Curso extends CI_Model {
         return $mis_cursos;
     }
 
-    public function get_curso($cod){
+    public function obtener_curso($cod){
         $this->load->database();
         $query = $this->db->get_where('curso', array('codigo' => $cod));
         return $query->result();
     }
 
-    public function get_horario($cod){
+    public function obtener_horario($cod){
         $this->load->database();
         $this->db->select('horario');
         $query = $this->db->get_where('curso', array('codigo' => $cod));
         return $query->result();
     }
 
-    public function get_nivel($cod){
+    public function obtener_nivel($cod){
         $this->load->database();
         $this->db->select('nivel');
         $query = $this->db->get_where('curso', array('codigo' => $cod));
         return $query->result();
     }
 
-		public function delete($cod){
+		public function eliminar_curso($cod){
         $this->load->database();
         $query = $this->db->delete('curso', array('codigo' => $cod));
         $query = $this->db->get_where('curso', array('codigo' => $cod));
