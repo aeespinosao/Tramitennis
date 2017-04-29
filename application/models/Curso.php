@@ -59,6 +59,28 @@ class Curso extends CI_Model {
         return $query->result();
     }
 
+    public function get_all_where_in($cursos){
+
+        $return = [];
+
+        $this->load->database();
+        $this->load->model('Horario');
+
+        $this->db->select('*');
+        $this->db->from('curso');
+        $this->db->where_in('codigo', $cursos);
+        $query = $this->db->get();
+
+
+        foreach ($query->result() as &$curso){
+            $horarios =  $this->Horario->get_propio($curso->horario);
+            $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
+            $return[] = $curso;
+        }
+
+        return $return;
+    }
+
     public function get_curso($cod){
         $this->load->database();
         $query = $this->db->get_where('curso', array('codigo' => $cod));

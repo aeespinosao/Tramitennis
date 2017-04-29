@@ -108,21 +108,10 @@ class Admin_cursos extends CI_Controller {
         }
 
         $this->db->reset_query();
-        $this->load->model('Horario');
         $cursos = [];
 
         if(count($mis_cursos) > 0){
-            $this->db->select('*');
-            $this->db->from('curso');
-            $this->db->where_in('codigo', $mis_cursos);
-            $query = $this->db->get();
-
-
-            foreach ($query->result() as &$curso){
-                $horarios =  $this->Horario->get_propio($curso->horario);
-                $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
-                $cursos[] = $curso;
-            }
+            $cursos = $this->Curso->get_all_where_in($mis_cursos);
         }
 
 
@@ -370,7 +359,7 @@ class Admin_cursos extends CI_Controller {
 
         if($jugador = $this->Jugador->get_current_jugador()){
             $cursos = $this->input->post('cursos');
-            if(count($cursos) <= 0 || !$this->Matricula->validar_matriculas($cursos, $jugador)) $guardado = false;
+            if(count($cursos) == 0 || !$this->Matricula->validar_matriculas($cursos, $jugador)) $guardado = false;
 
             if($guardado && count($cursos) > 0){
                 foreach ($cursos as $codigo_curso){
@@ -430,23 +419,10 @@ class Admin_cursos extends CI_Controller {
 
         $this->db->reset_query();
 
-
-        $this->load->model('Horario');
-
         $cursos = [];
 
         if(count($mis_cursos) > 0){
-            $this->db->select('*');
-            $this->db->from('curso');
-            $this->db->where_in('codigo', $mis_cursos);
-            $query = $this->db->get();
-
-
-            foreach ($query->result() as &$curso){
-                $horarios =  $this->Horario->get_propio($curso->horario);
-                $curso->horarioObj = count($horarios) > 0 ? $horarios[0] : null;
-                $cursos[] = $curso;
-            }
+            $cursos = $this->Curso->get_all_where_in($mis_cursos);
         }
 
 

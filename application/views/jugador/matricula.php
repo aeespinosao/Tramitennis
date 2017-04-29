@@ -7,7 +7,7 @@
     <?php } else { ?>
         <div class="alert alert-danger">
             <i class="fa fa-check-square-o" aria-hidden="true"></i>
-            No se puede matricular menos de 1 o mas de 2 cursos
+            No se puede matricular a 0 o mas de 2 cursos, tampoco a cursos con el cupo lleno
         </div>
     <?php } ?>
 <?php } ?>

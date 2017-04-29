@@ -24,8 +24,6 @@ class Matricula extends CI_Model {
             }
         }
 
-
-
         return $cursos;
     }
 
@@ -72,11 +70,41 @@ class Matricula extends CI_Model {
     }
 
     public function validar_matriculas($cursos, $jugador){
+        $this->load->model('Curso');
         $matriculados = count($cursos);
         $mis_cursos = $this->get_mis_cursos($jugador);
         $matriculados += count($mis_cursos);
         if($matriculados > 2) return false;
+
+        foreach ($cursos as $curso_id) {
+
+            $return = $this->Curso->get_curso($curso_id);
+            $curso = $return[0];
+            $numero_inscritos = $this->get_numero_matriculados($curso);
+            if(($numero_inscritos + 1) > $curso->cupos_disponibles) return false;
+        }
+
         return true;
+    }
+
+
+    public function get_matriculados($curso){
+        $this->load->database();
+        $this->db->select('cedula_jugador');
+        $query = $this->db->get_where('matricula', array(
+            'codigo_curso' => $curso->codigo
+        ));
+
+        $matriculados = [];
+        foreach($query->result() as $row)
+            $matriculados[] = $row->cedula_jugador;
+
+        return $matriculados;
+    }
+
+    public function get_numero_matriculados($curso){
+        $matriculados = $this->get_matriculados($curso);
+        return count($matriculados);
     }
 
 }?>
