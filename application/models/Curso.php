@@ -57,9 +57,9 @@ class Curso extends CI_Model {
         return $query->result();
     }
 
-    public function get_for_matricula($jugador){
+    public function obtener_matricula($jugador){
         $this->load->database();
-        $mis_cursos = $this->get_mis_cursos($jugador);
+        $mis_cursos = $this->obtener_cursos_jugador($jugador);
         $query = $this->db->get_where('curso', array('nivel' => $jugador->nivel));
 
         $cursos = [];
@@ -74,7 +74,7 @@ class Curso extends CI_Model {
         return $cursos;
     }
 
-    public function get_mis_cursos($jugador){
+    public function obtener_cursos_jugador($jugador){
         $this->load->database();
         $this->db->select('codigo_curso');
         $query = $this->db->get_where('matricula', array(

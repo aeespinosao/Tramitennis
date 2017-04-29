@@ -12,9 +12,8 @@ class Matricula extends CI_Model {
 		return $query->result();
 	}
 
-    public function get_for_matricula($jugador){
-        $this->load->database();
-        $mis_cursos = $this->get_mis_cursos($jugador);
+    public function obtener_matricula($jugador){
+        $mis_cursos = $this->obtener_cursos_jugador($jugador);
         $query = $this->db->get_where('curso', array('nivel' => $jugador->nivel));
 
         $cursos = [];
@@ -29,9 +28,8 @@ class Matricula extends CI_Model {
         return $cursos;
     }
 
-    public function save(){
+    public function guardar(){
 
-        $this->load->database();
         try{
             $this->db->insert("matricula", array(
                 'codigo_curso' => $this->codigo_curso,
@@ -44,8 +42,7 @@ class Matricula extends CI_Model {
 
     }
 
-    public function get_mis_cursos($jugador){
-        $this->load->database();
+    public function obtener_cursos_jugador($jugador){
         $this->db->select('codigo_curso');
         $query = $this->db->get_where('matricula', array(
             'cedula_jugador' => $jugador->cedula
@@ -73,11 +70,10 @@ class Matricula extends CI_Model {
 
     public function validar_matriculas($cursos, $jugador){
         $matriculados = count($cursos);
-        $mis_cursos = $this->get_mis_cursos($jugador);
+        $mis_cursos = $this->obtener_cursos_jugador($jugador);
         $matriculados += count($mis_cursos);
         if($matriculados > 2) return false;
         return true;
     }
 
 }?>
-	
