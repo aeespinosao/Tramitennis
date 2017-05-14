@@ -5,6 +5,8 @@ class Admin_cursos extends CI_Controller {
 
 	public function cargar_vista()
 	{
+
+    redirect_if_not_logged_in();
     $vista = $this->uri->segment(3);
     if($vista==='crear'){
       $this->load->model('Horario');
@@ -134,6 +136,7 @@ class Admin_cursos extends CI_Controller {
 	}
 
 	public function validar(){
+        redirect_if_not_logged_in();
 		$config = array(
       array(
 							'field' => 'selector',
@@ -156,6 +159,7 @@ class Admin_cursos extends CI_Controller {
 	}
 
   public function crear_nuevo(){
+        redirect_if_not_logged_in();
 		$this->session->set_flashdata('horarios_checked',[]);
 		if ($this->validar() == FALSE)
 	    {
@@ -205,6 +209,7 @@ class Admin_cursos extends CI_Controller {
 
   public function editar()
   {
+    redirect_if_not_logged_in();
     $this->load->model('Horario');
     $this->load->model('Curso');
     $codigo_curso = $this->uri->segment(3);
@@ -231,6 +236,7 @@ class Admin_cursos extends CI_Controller {
   }
 
   public function guardar_edicion(){
+      redirect_if_not_logged_in();
 			if ($this->validar() == FALSE)
 		    {
 					$this->load->model('Horario');
@@ -303,6 +309,7 @@ class Admin_cursos extends CI_Controller {
 	}
 
 	public function eliminar(){
+        redirect_if_not_logged_in();
 		$codigo = $this->uri->segment(3);
 		$horario = $this->uri->segment(4);
 		$this->load->model('Curso');
@@ -329,6 +336,7 @@ class Admin_cursos extends CI_Controller {
 	}
 
 	public function matricular_cursos(){
+        redirect_if_not_logged_in();
         $guardado = true;
         $this->load->model('Curso');
         $this->load->model('Matricula');
@@ -376,7 +384,7 @@ class Admin_cursos extends CI_Controller {
 
 
     public function eliminar_matricula(){
-
+        redirect_if_not_logged_in();
         $this->load->model('Matricula');
         $this->load->model('Curso');
         $this->load->model('Jugador');

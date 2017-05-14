@@ -39,6 +39,7 @@
                 <li class="efecto"><a href="#">Eliminar reserva</a></li>
               </ul>
             </li>
+            <li class="efecto"><a href="<?php echo base_url();?>index.php/user_authentication/logout">Cerrar Sesión</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

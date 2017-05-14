@@ -43,6 +43,7 @@
               </ul>
             </li>
             <li class="efecto"><a href="#">Exportar listas</a></li>
+            <li class="efecto"><a href="<?php echo base_url();?>index.php/user_authentication/logout">Cerrar Sesión</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
