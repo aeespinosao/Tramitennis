@@ -36,9 +36,9 @@
             <li class="dropdown efecto">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion de horarios <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li class="efecto"><a href="#">Crear horario</a></li>
-                <li class="efecto"><a href="#">Editar horario</a></li>
-                <li class="efecto"><a href="#">Eliminar horario</a></li>
+                <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_horarios/cargar_vista/crear">Crear horario</a></li>
+                <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_horarios/cargar_vista/editar">Editar horario</a></li>
+                <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_horarios/cargar_vista/eliminar">Eliminar horario</a></li>
                 <li class="efecto"><a href="#">Disponibilidad de canchas</a></li>
               </ul>
             </li>

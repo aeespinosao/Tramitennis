@@ -10,7 +10,6 @@ class Horario extends CI_Model {
 	public $cancha;
 
 	public function insertar(){
-		echo var_dump($this);
 		try{
             $this->db->insert("horario", array(
                 'fecha_inicio' => $this->fecha_inicio,
@@ -23,7 +22,7 @@ class Horario extends CI_Model {
         }
         return true;
 	}
-	
+
 	public function get_all(){
 		$query = $this->db->get('horario');
 		return $query->result();
@@ -53,6 +52,30 @@ class Horario extends CI_Model {
 			$this->db->where('numero', $codigo);
 			$this->db->update('horario');
 		}
+	}
+
+	public function eliminar_horario($cod){
+        $query = $this->db->delete('horario', array('numero' => $cod));
+        $query = $this->db->get_where('horario', array('numero' => $cod));
+        return $query->result();
+    }
+
+    public function obtener_horario($cod){
+		$query = $this->db->get_where('horario', array('numero' => $cod));
+		return $query->result();
+	}
+
+	public function actualizar_horario($cod){
+        try{
+            $this->db->set('fecha_inicio', $this->fecha_inicio);
+            $this->db->set('fecha_fin', $this->fecha_fin);
+            $this->db->set('hora', $this->hora);
+            $this->db->where('numero', $cod);
+            $this->db->update('horario');
+        }catch (Exception $e){
+            return false;
+        }
+        return true;
 	}
 
 }?>
