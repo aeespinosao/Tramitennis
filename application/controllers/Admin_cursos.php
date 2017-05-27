@@ -6,7 +6,7 @@ class Admin_cursos extends CI_Controller {
 	public function cargar_vista()
 	{
 
-    redirect_if_not_logged_in();
+    //redirect_if_not_logged_in();
     $vista = $this->uri->segment(3);
     if($vista==='crear'){
       $this->load->model('Horario');

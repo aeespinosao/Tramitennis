@@ -18,3 +18,10 @@ $('document').ready(function () {
       $('.focus-text').closest('div').removeClass('focus-t');
   }
 })
+$(function(){
+    $('#t1').clockface();  
+});
+$('.datepicker').datepicker({
+  format: 'mm/dd/yyyy',
+  startDate: '-3d'
+});
