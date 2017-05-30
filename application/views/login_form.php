@@ -6,7 +6,7 @@ if (isset($message_display)) {
 }
 ?>
 <div class="container">
-    <?php echo form_open('user_authentication/user_login_process'); ?>
+    <?php echo form_open('autenticacion/login'); ?>
     <?php
     echo "<div class='error_msg'>";
     if (isset($error_message)) {
@@ -52,7 +52,7 @@ if (isset($message_display)) {
                         <div class="col-md-12 control">
                             <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
                                 No tienes una cuenta!
-                                <a href="<?php echo base_url() ?>index.php/user_authentication/user_registration_show"
+                                <a href="<?php echo base_url() ?>index.php/autenticacion/nuevo"
                                    onclick="$('#loginbox').hide(); $('#signupbox').show()">
                                     Inscribete.
                                 </a>

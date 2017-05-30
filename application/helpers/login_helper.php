@@ -10,7 +10,7 @@ function is_logged_in() {
 }
 
 function load_login() {
-    header('location: '.base_url().'index.php/user_authentication');
+    header('location: '.base_url().'index.php/autenticacion');
 }
 
 function redirect_if_not_logged_in(){

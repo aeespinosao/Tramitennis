@@ -1,7 +1,7 @@
 <html>
 <?php
 if (isset($this->session->userdata['logged_in'])) {
-    header("location: http://localhost/tramitennis/index.php/user_authentication/user_login_process");
+    header("location: http://localhost/tramitennis/index.php/autenticacion/login");
 }
 ?>
 <head>
@@ -16,7 +16,7 @@ if (isset($this->session->userdata['logged_in'])) {
         echo "<div class='error_msg'>";
         echo validation_errors();
         echo "</div>";
-        echo form_open('user_authentication/new_user_registration');
+        echo form_open('autenticacion/crear');
 
         echo form_label('Nombre');
         echo"<br/>";
