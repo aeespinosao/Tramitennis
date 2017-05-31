@@ -84,8 +84,10 @@ CREATE TABLE `jugador` (
 --
 
 CREATE TABLE `reserva` (
-  `codigo` int(20) NOT NULL,
-  `horario` int(10) NOT NULL
+  `codigo` int(20) NOT NULL AUTO_INCREMENT,
+  `horario` int(10) NOT NULL,
+  `ced_jugador` int(20) NOT NULL,
+  PRIMARY KEY (`codigo`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -149,8 +151,7 @@ ALTER TABLE `jugador`
 --
 -- Indices de la tabla `reserva`
 --
-ALTER TABLE `reserva`
-  ADD PRIMARY KEY (`codigo`),
+ALTER TABLE `reserva`  
   ADD KEY `horario_reserva` (`horario`);
 
 --
@@ -206,7 +207,8 @@ ALTER TABLE `jugador`
 -- Filtros para la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  ADD CONSTRAINT `horario_reserva` FOREIGN KEY (`horario`) REFERENCES `horario` (`numero`);
+  ADD CONSTRAINT `horario_reserva` FOREIGN KEY (`horario`) REFERENCES `horario` (`numero`),
+  ADD CONSTRAINT `cedula_jugador` FOREIGN KEY (`ced_jugador`) REFERENCES `jugador` (`cedula`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -241,7 +241,7 @@ class Admin_cursos extends CI_Controller {
 		    {
 					$this->load->model('Horario');
 			    $this->load->model('Curso');
-			    $codigo_curso = $codigo_curso = $this->session->flashdata('codigo_curso');
+			    $codigo_curso = $this->session->flashdata('codigo_curso');
 			    $curso_seleccionado = $this->Curso->obtener_curso($codigo_curso);
 			    $horarios = [];
 			    $horarios = $this->Horario->obtener_disponibles();

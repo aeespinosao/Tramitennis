@@ -24,15 +24,7 @@
                 <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_cursos/cargar_vista/editar">Editar curso</a></li>
                 <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_cursos/cargar_vista/eliminar">Eliminar curso</a></li>
               </ul>
-            </li>
-            <li class="dropdown efecto">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion de eventos <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li class="efecto"><a href="#">Crear evento</a></li>
-                <li class="efecto"><a href="#">Editar evento</a></li>
-                <li class="efecto"><a href="#">Eliminar evento</a></li>
-              </ul>
-            </li>
+            </li>            
             <li class="dropdown efecto">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion de horarios <b class="caret"></b></a>
               <ul class="dropdown-menu">

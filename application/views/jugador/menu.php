@@ -24,19 +24,13 @@
                 <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_cursos/cargar_vista/cancelar">Cancelar curso</a></li>
               </ul>
             </li>
-            <li class="dropdown efecto">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion de eventos <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li class="efecto"><a href="#">Inscripción a evento</a></li>
-                <li class="efecto"><a href="#">Cancelar inscripción a evento</a></li>
-              </ul>
-            </li>
+            
             <li class="dropdown efecto">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion de reservas <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li class="efecto"><a href="#">Hacer reserva</a></li>
-                <li class="efecto"><a href="#">Editar reserva</a></li>
-                <li class="efecto"><a href="#">Eliminar reserva</a></li>
+                <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_reservas/cargar_vista/hacer">Hacer reserva</a></li>
+                <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_reservas/cargar_vista/editar">Editar reserva</a></li>
+                <li class="efecto"><a href="<?php echo base_url();?>index.php/admin_reservas/cargar_vista/eliminar">Eliminar reserva</a></li>
               </ul>
             </li>
             <li class="efecto"><a href="<?php echo base_url();?>index.php/autenticacion/logout">Cerrar Sesión</a></li>
